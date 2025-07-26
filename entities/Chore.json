@@ -1,0 +1,108 @@
+{
+  "name": "Chore",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Chore title"
+    },
+    "description": {
+      "type": "string",
+      "description": "Detailed description of the chore"
+    },
+    "points": {
+      "type": "number",
+      "default": 10,
+      "description": "Points awarded for completion (for gamification)"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "bedroom",
+        "kitchen",
+        "bathroom",
+        "living_room",
+        "outdoor",
+        "pets",
+        "self_care",
+        "academic",
+        "other"
+      ],
+      "default": "other",
+      "description": "Chore category"
+    },
+    "difficulty": {
+      "type": "string",
+      "enum": [
+        "easy",
+        "medium",
+        "hard"
+      ],
+      "default": "easy",
+      "description": "Difficulty level"
+    },
+    "frequency": {
+      "type": "string",
+      "enum": [
+        "daily",
+        "weekly",
+        "monthly",
+        "once"
+      ],
+      "default": "weekly",
+      "description": "How often the chore should be done"
+    },
+    "min_age": {
+      "type": "number",
+      "minimum": 4,
+      "maximum": 16,
+      "default": 4,
+      "description": "Minimum age for this chore"
+    },
+    "max_age": {
+      "type": "number",
+      "minimum": 4,
+      "maximum": 16,
+      "default": 16,
+      "description": "Maximum age for this chore"
+    },
+    "is_template": {
+      "type": "boolean",
+      "default": false,
+      "description": "Is this a chore template?"
+    },
+    "assigned_to": {
+      "type": "string",
+      "description": "ID of the child this chore is assigned to"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "completed",
+        "verified",
+        "expired"
+      ],
+      "default": "pending",
+      "description": "Current status of the chore"
+    },
+    "due_date": {
+      "type": "string",
+      "format": "date",
+      "description": "When the chore is due"
+    },
+    "completed_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the chore was marked as completed"
+    },
+    "parent_email": {
+      "type": "string",
+      "description": "Email of the parent who created this chore"
+    }
+  },
+  "required": [
+    "title",
+    "parent_email"
+  ]
+}

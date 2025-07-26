@@ -1,0 +1,60 @@
+{
+  "name": "Child",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Child's name"
+    },
+    "age": {
+      "type": "number",
+      "minimum": 4,
+      "maximum": 16,
+      "description": "Child's age"
+    },
+    "avatar_color": {
+      "type": "string",
+      "enum": [
+        "blue",
+        "green",
+        "purple",
+        "orange",
+        "pink",
+        "red",
+        "yellow",
+        "teal"
+      ],
+      "default": "blue",
+      "description": "Avatar background color"
+    },
+    "total_points": {
+      "type": "number",
+      "default": 0,
+      "description": "Total points earned for gamification"
+    },
+    "total_money": {
+      "type": "number",
+      "default": 0,
+      "description": "Total money earned and saved in AUD"
+    },
+    "weekly_pocket_money": {
+      "type": "number",
+      "default": 0,
+      "description": "Fixed weekly pocket money allowance in AUD"
+    },
+    "level": {
+      "type": "number",
+      "default": 1,
+      "description": "Child's current level"
+    },
+    "parent_email": {
+      "type": "string",
+      "description": "Email of the parent who manages this child"
+    }
+  },
+  "required": [
+    "name",
+    "age",
+    "parent_email"
+  ]
+}
