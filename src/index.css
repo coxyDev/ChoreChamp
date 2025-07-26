@@ -24,7 +24,7 @@
     --muted: 224 242 241;
     --muted-foreground: 88 110 142;
     
-    /* Accent - Logo Golden Yellow (same as secondary) */
+    /* Accent - Logo Golden Yellow */
     --accent: 255 217 61;
     --accent-foreground: 58 74 107;
     
@@ -50,7 +50,6 @@
   }
 
   .dark {
-    /* Dark mode - using logo navy as base */
     --background: 58 74 107;
     --foreground: 248 250 252;
     --card: 71 85 129;
@@ -93,7 +92,7 @@
   }
 }
 
-/* ChoreChamp specific styles */
+/* ChoreChamp specific utility classes */
 .chorechamp-gradient {
   background: linear-gradient(135deg, rgb(78, 205, 196), rgb(255, 217, 61));
 }
