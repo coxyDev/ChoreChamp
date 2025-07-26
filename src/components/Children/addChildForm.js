@@ -1,150 +1,152 @@
-
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { X, UserPlus, Edit, DollarSign } from "lucide-react";
+import { X, User, DollarSign } from "lucide-react";
 
 const avatarColors = [
-  { name: "Sage", value: "sage", class: "bg-[#BDC4A7]" },
-  { name: "Sea Green", value: "sea", class: "bg-[#92B4A7]" },
-  { name: "Mauve", value: "mauve", class: "bg-[#93827F]" },
-  { name: "Coral", value: "coral", class: "bg-[#DA4167]" },
-  { name: "Charcoal", value: "charcoal", class: "bg-[#2F2F2F]" },
-  { name: "Cream", value: "cream", class: "bg-[#F3F5D2]" },
-  { name: "Dusty Rose", value: "dusty", class: "bg-[#D4A5A5]" },
-  { name: "Olive", value: "olive", class: "bg-[#A8B89A]" },
+  { value: "blue", class: "bg-blue-500", name: "Blue" },
+  { value: "green", class: "bg-green-500", name: "Green" },
+  { value: "purple", class: "bg-purple-500", name: "Purple" },
+  { value: "orange", class: "bg-orange-500", name: "Orange" },
+  { value: "pink", class: "bg-pink-500", name: "Pink" },
+  { value: "red", class: "bg-red-500", name: "Red" },
+  { value: "yellow", class: "bg-yellow-500", name: "Yellow" },
+  { value: "teal", class: "bg-teal-500", name: "Teal" },
+  { value: "sage", class: "bg-secondary", name: "Sage" },
+  { value: "mauve", class: "bg-primary", name: "Mauve" }
 ];
 
-export default function AddChildForm({ child, onSubmit, onCancel }) {
+export default function AddChildForm({ onSubmit, onCancel, child = null }) {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: child?.name || "",
-    age: child?.age || 4,
-    avatar_color: child?.avatar_color || "sage",
-    weekly_pocket_money: child?.weekly_pocket_money ?? 4
+    age: child?.age || "",
+    avatar_color: child?.avatar_color || "blue",
+    weekly_pocket_money: child?.weekly_pocket_money || 0
   });
-
-  useEffect(() => {
-    if (!child) { // Only auto-update for new children
-        setFormData(prev => ({ ...prev, weekly_pocket_money: prev.age }));
-    }
-  }, [formData.age, child]);
-
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!formData.name.trim()) return;
-    
-    setIsSubmitting(true);
-    try {
-      await onSubmit(formData);
-    } catch (error) {
-      console.error("Error submitting form:", error);
-    }
-    setIsSubmitting(false);
-  };
 
   const handleInputChange = (field, value) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    try {
+      await onSubmit(formData);
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    }
+    
+    setIsSubmitting(false);
+  };
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      className="mb-8"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50"
     >
-      <Card className="border-0 shadow-lg">
-        <CardHeader style={{ backgroundColor: '#F3F5ED' }}>
-          <div className="flex justify-between items-center">
-            <CardTitle className="flex items-center gap-2 text-xl font-bold" style={{ color: '#2F2F2F' }}>
-              {child ? <Edit className="w-5 h-5" /> : <UserPlus className="w-5 h-5" />}
-              {child ? "Edit Child" : "Add New Child"}
-            </CardTitle>
-            <Button variant="ghost" size="icon" onClick={onCancel}>
-              <X className="w-4 h-4" />
-            </Button>
-          </div>
+      <Card className="w-full max-w-md max-h-[90vh] overflow-auto border-0 shadow-2xl">
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4 p-4 sm:p-6">
+          <CardTitle className="text-lg sm:text-xl font-bold text-foreground">
+            {child ? "Edit Child" : "Add New Child"}
+          </CardTitle>
+          <Button 
+            variant="ghost" 
+            size="icon"
+            onClick={onCancel}
+            className="hover:bg-accent -mr-2"
+          >
+            <X className="w-5 h-5" />
+          </Button>
         </CardHeader>
-        <CardContent className="p-6">
+
+        <CardContent className="p-4 sm:p-6 pt-0">
           <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid md:grid-cols-3 gap-6">
-              <div className="space-y-2">
-                <Label htmlFor="name" className="text-sm font-medium" style={{ color: '#5A5A5A' }}>
-                  Child's Name *
-                </Label>
+            {/* Name Input */}
+            <div className="space-y-2">
+              <Label htmlFor="name" className="text-sm font-medium text-foreground">
+                Child's Name
+              </Label>
+              <div className="relative">
+                <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                 <Input
                   id="name"
                   value={formData.name}
                   onChange={(e) => handleInputChange("name", e.target.value)}
                   placeholder="Enter child's name"
-                  className="border-slate-300"
-                  style={{ borderColor: '#BDC4A7' }}
+                  className="pl-10 border-border focus:ring-ring min-h-[44px] sm:min-h-[36px]"
                   required
                 />
               </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="age" className="text-sm font-medium" style={{ color: '#5A5A5A' }}>
-                  Age *
-                </Label>
-                <Select
-                  value={formData.age.toString()}
-                  onValueChange={(value) => handleInputChange("age", parseInt(value))}
-                >
-                  <SelectTrigger className="border-slate-300" style={{ borderColor: '#BDC4A7' }}>
-                    <SelectValue placeholder="Select age" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {Array.from({ length: 13 }, (_, i) => i + 4).map((age) => (
-                      <SelectItem key={age} value={age.toString()}>
-                        {age} years old
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
+            </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="pocket_money" className="text-sm font-medium" style={{ color: '#5A5A5A' }}>
-                  Weekly Pocket Money
-                </Label>
-                 <div className="relative">
-                    <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4" style={{ color: '#5A5A5A' }} />
-                    <Input
-                        id="pocket_money"
-                        type="number"
-                        value={formData.weekly_pocket_money}
-                        onChange={(e) => handleInputChange("weekly_pocket_money", parseFloat(e.target.value) || 0)}
-                        className="pl-9 border-slate-300"
-                        style={{ borderColor: '#BDC4A7' }}
-                    />
-                 </div>
+            {/* Age Input */}
+            <div className="space-y-2">
+              <Label htmlFor="age" className="text-sm font-medium text-foreground">
+                Age
+              </Label>
+              <Input
+                id="age"
+                type="number"
+                min="3"
+                max="18"
+                value={formData.age}
+                onChange={(e) => handleInputChange("age", parseInt(e.target.value) || "")}
+                placeholder="Enter age"
+                className="border-border focus:ring-ring min-h-[44px] sm:min-h-[36px]"
+                required
+              />
+            </div>
+
+            {/* Weekly Allowance */}
+            <div className="space-y-2">
+              <Label htmlFor="pocket_money" className="text-sm font-medium text-foreground">
+                Weekly Pocket Money
+              </Label>
+              <div className="relative">
+                <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                <Input
+                  id="pocket_money"
+                  type="number"
+                  step="0.01"
+                  min="0"
+                  value={formData.weekly_pocket_money}
+                  onChange={(e) => handleInputChange("weekly_pocket_money", parseFloat(e.target.value) || 0)}
+                  placeholder="0.00"
+                  className="pl-10 border-border focus:ring-ring min-h-[44px] sm:min-h-[36px]"
+                />
               </div>
             </div>
 
+            {/* Avatar Color Selection */}
             <div className="space-y-3">
-              <Label className="text-sm font-medium" style={{ color: '#5A5A5A' }}>
+              <Label className="text-sm font-medium text-foreground">
                 Avatar Color
               </Label>
-              <div className="grid grid-cols-4 md:grid-cols-8 gap-3">
+              <div className="grid grid-cols-5 sm:grid-cols-5 gap-2 sm:gap-3">
                 {avatarColors.map((color) => (
                   <button
                     key={color.value}
                     type="button"
                     onClick={() => handleInputChange("avatar_color", color.value)}
-                    className={`w-12 h-12 rounded-full ${color.class} flex items-center justify-center transition-all duration-200 ${
-                      formData.avatar_color === color.value
-                        ? "ring-4 ring-[#93827F] scale-110"
-                        : "hover:scale-105"
-                    }`}
+                    className={`
+                      aspect-square w-full rounded-full ${color.class} flex items-center justify-center 
+                      transition-all duration-200 min-h-[44px] sm:min-h-[40px]
+                      ${formData.avatar_color === color.value
+                        ? "ring-4 ring-primary scale-110 shadow-lg"
+                        : "hover:scale-105 shadow-md"
+                      }
+                    `}
+                    title={color.name}
                   >
-                    <span className="text-white font-semibold">
+                    <span className="text-white font-semibold text-sm sm:text-base">
                       {formData.name ? formData.name.charAt(0).toUpperCase() : "?"}
                     </span>
                   </button>
@@ -152,20 +154,21 @@ export default function AddChildForm({ child, onSubmit, onCancel }) {
               </div>
             </div>
 
-            <div className="flex justify-end gap-3 pt-4 border-t border-slate-200">
+            {/* Action Buttons */}
+            <div className="flex flex-col-reverse sm:flex-row gap-3 pt-4 border-t border-border">
               <Button
                 type="button"
                 variant="outline"
                 onClick={onCancel}
                 disabled={isSubmitting}
+                className="w-full sm:w-auto border-border hover:bg-accent hover:text-accent-foreground min-h-[44px] sm:min-h-[36px]"
               >
                 Cancel
               </Button>
               <Button
                 type="submit"
                 disabled={isSubmitting || !formData.name.trim()}
-                style={{ backgroundColor: '#93827F', color: 'white' }}
-                className="hover:opacity-90"
+                className="w-full sm:w-auto bg-primary text-primary-foreground hover:bg-primary/90 min-h-[44px] sm:min-h-[36px]"
               >
                 {isSubmitting ? "Saving..." : child ? "Update Child" : "Add Child"}
               </Button>

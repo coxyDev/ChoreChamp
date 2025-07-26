@@ -1,26 +1,27 @@
-
 import React from "react";
 import { motion } from "framer-motion";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
-import { Star, Edit, Trash2, User, Calendar, DollarSign } from "lucide-react";
+import { User, Star, DollarSign, ClipboardCheck } from "lucide-react";
 
 const avatarColors = {
-  sage: "bg-[#BDC4A7]",
-  sea: "bg-[#92B4A7]",
-  mauve: "bg-[#93827F]",
-  coral: "bg-[#DA4167]",
-  charcoal: "bg-[#2F2F2F]",
-  cream: "bg-[#F3F5D2]",
-  dusty: "bg-[#D4A5A5]",
-  olive: "bg-[#A8B89A]"
+  blue: "bg-blue-500",
+  green: "bg-green-500", 
+  purple: "bg-purple-500",
+  orange: "bg-orange-500",
+  pink: "bg-pink-500",
+  red: "bg-red-500",
+  yellow: "bg-yellow-500",
+  teal: "bg-teal-500",
+  sage: "bg-secondary",
+  mauve: "bg-primary"
 };
 
-export default function ChildCard({ child, delay = 0, onEdit, onDelete }) {
+export default function ChildCard({ child, choreCount = 0, completedToday = 0, delay = 0 }) {
   const progressToNextLevel = ((child.total_points || 0) % 100);
   
   return (
@@ -29,65 +30,70 @@ export default function ChildCard({ child, delay = 0, onEdit, onDelete }) {
       animate={{ opacity: 1, scale: 1 }}
       transition={{ delay }}
     >
-      <Card className="hover:shadow-lg transition-all duration-300 border-0 shadow-md bg-white overflow-hidden">
-        <div style={{ background: 'linear-gradient(135deg, #F3F5ED, #E8EBD8)' }} className="p-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className={`w-14 h-14 ${avatarColors[child.avatar_color] || avatarColors.sage} rounded-full flex items-center justify-center shadow-lg`}>
-                <span className="text-white font-bold text-xl">
-                  {child.name.charAt(0).toUpperCase()}
-                </span>
-              </div>
-              <div>
-                <h3 className="font-bold text-xl" style={{ color: '#2F2F2F' }}>{child.name}</h3>
-                <div className="flex items-center gap-2 mt-1">
-                  <Badge variant="outline" className="text-xs bg-white">
-                    <Calendar className="w-3 h-3 mr-1" />
-                    Age {child.age}
-                  </Badge>
-                  <Badge className="text-xs" style={{ backgroundColor: '#93827F', color: 'white' }}>
-                    Level {child.level || 1}
-                  </Badge>
-                </div>
-              </div>
+      <Card className="hover:shadow-lg transition-all duration-300 border-0 shadow-md bg-card h-full">
+        <CardHeader className="pb-4 p-4 sm:p-6">
+          <div className="flex items-center gap-3">
+            <div className={`w-12 h-12 sm:w-14 sm:h-14 ${avatarColors[child.avatar_color || 'blue']} rounded-full flex items-center justify-center shadow-md flex-shrink-0`}>
+              <span className="text-white font-bold text-lg sm:text-xl">
+                {child.name.charAt(0).toUpperCase()}
+              </span>
             </div>
-            <div className="flex gap-2">
-              <Button variant="ghost" size="icon" onClick={() => onEdit(child)} className="hover:bg-blue-100">
-                <Edit className="w-4 h-4" style={{ color: '#5A5A5A' }} />
-              </Button>
-              <Button variant="ghost" size="icon" onClick={() => onDelete(child.id)} className="hover:bg-red-100">
-                <Trash2 className="w-4 h-4" style={{ color: '#DA4167' }} />
-              </Button>
+            <div className="flex-1 min-w-0">
+              <h3 className="font-bold text-lg sm:text-xl text-foreground truncate">
+                {child.name}
+              </h3>
+              <div className="flex items-center gap-2 mt-1">
+                <Badge variant="outline" className="text-xs border-border">
+                  Age {child.age}
+                </Badge>
+                <Badge className="text-xs bg-secondary text-secondary-foreground">
+                  Level {child.level || 1}
+                </Badge>
+              </div>
             </div>
           </div>
-        </div>
-        
-        <CardContent className="p-6 space-y-4">
-          <div className="flex items-center justify-between">
-            <span className="text-sm font-medium" style={{ color: '#5A5A5A' }}>Weekly Allowance</span>
-            <div className="flex items-center gap-1 font-bold" style={{ color: '#2F2F2F' }}>
-              <DollarSign className="w-4 h-4" style={{ color: '#92B4A7' }} />
-              <span>${(child.weekly_pocket_money || 0).toFixed(2)}</span>
+        </CardHeader>
+
+        <CardContent className="space-y-4 p-4 sm:p-6 pt-0">
+          {/* Stats Grid */}
+          <div className="grid grid-cols-2 gap-3 sm:gap-4">
+            <div className="text-center p-3 rounded-lg bg-accent/50">
+              <div className="flex items-center justify-center gap-1 text-primary mb-1">
+                <Star className="w-4 h-4 fill-current" />
+                <span className="font-bold text-sm sm:text-base">{child.total_points || 0}</span>
+              </div>
+              <span className="text-xs text-muted-foreground">Total Points</span>
+            </div>
+            
+            <div className="text-center p-3 rounded-lg bg-accent/50">
+              <div className="flex items-center justify-center gap-1 text-secondary mb-1">
+                <DollarSign className="w-4 h-4" />
+                <span className="font-bold text-sm sm:text-base">${(child.weekly_pocket_money || 0).toFixed(2)}</span>
+              </div>
+              <span className="text-xs text-muted-foreground">Weekly Allowance</span>
             </div>
           </div>
           
+          {/* Progress to Next Level */}
           <div className="space-y-2">
             <div className="flex justify-between text-sm">
-              <span style={{ color: '#5A5A5A' }}>Progress to Level {(child.level || 1) + 1}</span>
-              <span className="font-medium" style={{ color: '#2F2F2F' }}>{progressToNextLevel}/100</span>
+              <span className="text-muted-foreground">Progress to Level {(child.level || 1) + 1}</span>
+              <span className="font-medium text-foreground">{progressToNextLevel}/100</span>
             </div>
             <Progress value={progressToNextLevel} className="h-2" />
           </div>
           
-          <div className="grid grid-cols-2 gap-3 pt-4">
+          {/* Action Buttons */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 pt-2">
             <Link to={createPageUrl(`ChildProfile?childId=${child.id}`)}>
-              <Button className="w-full text-white" style={{ backgroundColor: '#93827F' }}>
+              <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90 min-h-[44px] sm:min-h-[36px]">
                 <User className="w-4 h-4 mr-2" />
                 View Profile
               </Button>
             </Link>
             <Link to={createPageUrl(`AssignChore?childId=${child.id}`)}>
-              <Button variant="outline" className="w-full hover:bg-slate-50">
+              <Button variant="outline" className="w-full border-border hover:bg-accent hover:text-accent-foreground min-h-[44px] sm:min-h-[36px]">
+                <ClipboardCheck className="w-4 h-4 mr-2" />
                 Assign Chore
               </Button>
             </Link>

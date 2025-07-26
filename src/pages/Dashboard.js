@@ -13,7 +13,8 @@ import {
   Plus,
   Calendar,
   Award,
-  CheckCircle2
+  CheckCircle2,
+  Zap
 } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -68,17 +69,17 @@ export default function Dashboard() {
 
   if (isLoading) {
     return (
-      <div className="p-6 space-y-6 bg-background min-h-screen">
+      <div className="p-4 sm:p-6 space-y-4 sm:space-y-6 bg-background min-h-screen">
         <div className="animate-pulse">
-          <div className="h-8 bg-muted rounded w-1/4 mb-6"></div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
+          <div className="h-6 sm:h-8 bg-muted rounded w-3/4 sm:w-1/4 mb-4 sm:mb-6"></div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 lg:gap-6 mb-6 sm:mb-8">
             {Array(5).fill(0).map((_, i) => (
-              <div key={i} className="h-32 bg-muted rounded-xl"></div>
+              <div key={i} className="h-24 sm:h-32 bg-muted rounded-xl"></div>
             ))}
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
             {Array(3).fill(0).map((_, i) => (
-              <div key={i} className="h-64 bg-muted rounded-xl"></div>
+              <div key={i} className="h-48 sm:h-64 bg-muted rounded-xl"></div>
             ))}
           </div>
         </div>
@@ -87,29 +88,29 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="p-6 space-y-6 bg-background min-h-screen">
+    <div className="p-4 sm:p-6 space-y-4 sm:space-y-6 bg-background min-h-screen">
       {/* Header */}
       <motion.div 
         initial={{ opacity: 0, y: -20 }} 
         animate={{ opacity: 1, y: 0 }}
-        className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4"
+        className="flex flex-col space-y-4 sm:space-y-0 sm:flex-row sm:justify-between sm:items-start gap-4"
       >
-        <div>
-          <h1 className="text-3xl font-bold text-foreground">Family Dashboard</h1>
-          <p className="text-lg mt-2 text-muted-foreground">
+        <div className="min-w-0">
+          <h1 className="text-2xl sm:text-3xl font-bold text-foreground">Family Dashboard</h1>
+          <p className="text-base sm:text-lg mt-1 sm:mt-2 text-muted-foreground">
             Welcome back! Here's what's happening with your family today.
           </p>
         </div>
         
-        <div className="flex gap-3">
-          <Link to={createPageUrl("Children")}>
-            <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
+        <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 w-full sm:w-auto">
+          <Link to={createPageUrl("Children")} className="w-full sm:w-auto">
+            <Button className="bg-primary text-primary-foreground hover:bg-primary/90 w-full sm:w-auto min-h-[44px] sm:min-h-[36px]">
               <Plus className="w-4 h-4 mr-2" />
               Add Child
             </Button>
           </Link>
-          <Link to={createPageUrl("ChoreTemplates")}>
-            <Button variant="outline" className="border-border hover:bg-accent hover:text-accent-foreground">
+          <Link to={createPageUrl("ChoreTemplates")} className="w-full sm:w-auto">
+            <Button variant="outline" className="border-border hover:bg-accent hover:text-accent-foreground w-full sm:w-auto min-h-[44px] sm:min-h-[36px]">
               <ClipboardCheck className="w-4 h-4 mr-2" />
               Browse Chores
             </Button>
@@ -123,7 +124,7 @@ export default function Dashboard() {
       </motion.div>
 
       {/* Main Content Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
         {/* Children Overview */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
           <ChildOverview children={children} chores={chores} />
@@ -135,7 +136,7 @@ export default function Dashboard() {
         </motion.div>
 
         {/* Quick Actions & Today's Progress */}
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
             <QuickActions />
           </motion.div>
@@ -143,19 +144,19 @@ export default function Dashboard() {
           {/* Today's Achievements */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}>
             <Card className="border-0 shadow-md">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-foreground">
+              <CardHeader className="p-4 sm:p-6">
+                <CardTitle className="flex items-center gap-2 text-foreground text-base sm:text-lg">
                   <Award className="w-5 h-5 text-secondary" />
                   Today's Achievements
                 </CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="p-4 sm:p-6 pt-0">
                 {stats.completedToday > 0 ? (
                   <div className="space-y-3">
                     <div className="flex items-center gap-2">
-                      <CheckCircle2 className="w-5 h-5 text-green-600" />
-                      <span className="font-medium text-green-800">
-                        {stats.completedToday} chores completed today!
+                      <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0" />
+                      <span className="font-medium text-green-800 text-sm sm:text-base">
+                        {stats.completedToday} chore{stats.completedToday > 1 ? 's' : ''} completed today!
                       </span>
                     </div>
                     <p className="text-sm text-green-600">
@@ -163,10 +164,10 @@ export default function Dashboard() {
                     </p>
                   </div>
                 ) : (
-                  <div className="text-center py-4">
+                  <div className="text-center py-4 sm:py-6">
                     <Calendar className="w-8 h-8 text-muted mx-auto mb-2" />
-                    <p className="text-foreground font-medium">Ready for a productive day!</p>
-                    <p className="text-sm text-muted-foreground mt-1">
+                    <p className="text-foreground font-medium text-sm sm:text-base">Ready for a productive day!</p>
+                    <p className="text-xs sm:text-sm text-muted-foreground mt-1">
                       Assign some chores to get started.
                     </p>
                   </div>
