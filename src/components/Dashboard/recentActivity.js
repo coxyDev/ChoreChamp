@@ -3,14 +3,27 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar } from "@/components/ui/avatar";
 import { CheckCircle2, Clock, Calendar, Star } from "lucide-react";
-import { format, isToday, isYesterday } from "date-fns";
+import { format, isToday, isYesterday, isValid } from "date-fns";
 
 const ActivityItem = ({ activity, children }) => {
   const child = children.find(c => c.id === activity.assigned_to);
-  const getTimeDisplay = (date) => {
-    if (isToday(new Date(date))) return "Today";
-    if (isYesterday(new Date(date))) return "Yesterday";
-    return format(new Date(date), "MMM d");
+  
+  const getTimeDisplay = (dateString) => {
+    if (!dateString) return "Recently";
+    
+    const date = new Date(dateString);
+    
+    // Check if the date is valid
+    if (!isValid(date)) return "Recently";
+    
+    try {
+      if (isToday(date)) return "Today";
+      if (isYesterday(date)) return "Yesterday";
+      return format(date, "MMM d");
+    } catch (error) {
+      console.warn("Date formatting error:", error, "for date:", dateString);
+      return "Recently";
+    }
   };
 
   const statusColors = {
@@ -25,7 +38,7 @@ const ActivityItem = ({ activity, children }) => {
     verified: Star
   };
 
-  const StatusIcon = statusIcons[activity.status];
+  const StatusIcon = statusIcons[activity.status] || Clock;
 
   return (
     <div className="flex items-center gap-4 p-3 rounded-lg hover:bg-slate-50 transition-colors">
@@ -39,15 +52,15 @@ const ActivityItem = ({ activity, children }) => {
         <p className="font-medium text-slate-900 truncate">{activity.title}</p>
         <div className="flex items-center gap-2 mt-1">
           <span className="text-sm text-slate-600">{child?.name || 'Unknown Child'}</span>
-          <Badge variant="outline" className={`text-xs ${statusColors[activity.status]}`}>
-            {activity.status}
+          <Badge variant="outline" className={`text-xs ${statusColors[activity.status] || statusColors.pending}`}>
+            {activity.status || 'pending'}
           </Badge>
         </div>
       </div>
       <div className="text-right">
         <div className="flex items-center gap-1 text-yellow-600 mb-1">
           <Star className="w-3 h-3 fill-current" />
-          <span className="text-sm font-medium">{activity.points}</span>
+          <span className="text-sm font-medium">{activity.points || 0}</span>
         </div>
         <p className="text-xs text-slate-500">
           {activity.completed_date ? getTimeDisplay(activity.completed_date) : getTimeDisplay(activity.created_date)}
@@ -59,9 +72,16 @@ const ActivityItem = ({ activity, children }) => {
 
 export default function RecentActivity({ chores, children }) {
   const recentChores = chores
+    .filter(chore => chore.completed_date || chore.created_date) // Only include chores with valid dates
     .sort((a, b) => {
       const dateA = new Date(a.completed_date || a.created_date);
       const dateB = new Date(b.completed_date || b.created_date);
+      
+      // Handle invalid dates
+      if (!isValid(dateA) && !isValid(dateB)) return 0;
+      if (!isValid(dateA)) return 1;
+      if (!isValid(dateB)) return -1;
+      
       return dateB - dateA;
     })
     .slice(0, 8);
