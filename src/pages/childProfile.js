@@ -6,56 +6,53 @@ import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
+
 import ChildProfileHeader from "../components/children/ChildProfileHeader";
 import ChildChoreList from "../components/children/ChildChoreList";
 
 export default function ChildProfile() {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const childId = searchParams.get('childId');
+  
   const [child, setChild] = useState(null);
   const [chores, setChores] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const location = useLocation();
-  const childId = new URLSearchParams(location.search).get("childId");
+  const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
     if (childId) {
-      loadProfileData();
+      loadChildData();
     }
   }, [childId]);
 
-  const loadProfileData = async () => {
+  const loadChildData = async () => {
     setIsLoading(true);
     try {
+      const user = await User.me();
+      setCurrentUser(user);
+      
       const [childData, choresData] = await Promise.all([
         Child.get(childId),
-        Chore.filter({ assigned_to: childId }, "-created_date")
+        Chore.filter({ assigned_to: childId, parent_email: user.email })
       ]);
+      
       setChild(childData);
       setChores(choresData);
     } catch (error) {
-      console.error("Error loading profile data:", error);
+      console.error("Error loading child data:", error);
     }
     setIsLoading(false);
   };
-  
+
   const handleVerifyChore = async (choreId) => {
-    const choreToVerify = chores.find(c => c.id === choreId);
-    if (!choreToVerify || choreToVerify.status !== 'completed') return;
-
     try {
-      const updatedChore = await Chore.update(choreId, { status: 'verified' });
+      const updatedChore = await Chore.update(choreId, { 
+        status: 'verified',
+        verified_date: new Date().toISOString()
+      });
       
-      const childUpdateData = {
-        total_points: (child.total_points || 0) + choreToVerify.points,
-      };
-      
-      const newLevel = Math.floor(childUpdateData.total_points / 100) + 1;
-      if (newLevel > (child.level || 1)) {
-        childUpdateData.level = newLevel;
-      }
-      
-      const updatedChild = await Child.update(childId, childUpdateData);
-
-      setChild(updatedChild);
+      // Update local state
       setChores(chores.map(c => c.id === choreId ? updatedChore : c));
 
     } catch (error) {
@@ -65,10 +62,10 @@ export default function ChildProfile() {
 
   if (isLoading) {
     return (
-      <div className="bg-background min-h-screen">
+      <div className="p-6 bg-background min-h-screen">
         <div className="animate-pulse">
-          <div className="bg-background min-h-screen"></div>
-          <div className="bg-background min-h-screen"></div>
+          <div className="h-8 rounded w-1/3 mb-6 bg-muted"></div>
+          <div className="h-64 rounded-xl bg-muted"></div>
         </div>
       </div>
     );
@@ -76,17 +73,17 @@ export default function ChildProfile() {
 
   if (!child) {
     return (
-      <div className="bg-background min-h-screen">
+      <div className="p-6 bg-background min-h-screen">
         <p className="text-foreground">Child not found.</p>
       </div>
     );
   }
 
   return (
-    <div className="bg-background min-h-screen">
+    <div className="p-6 space-y-8 max-w-7xl mx-auto bg-background min-h-screen">
       <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }}>
         <Link to={createPageUrl("Children")}>
-          <Button variant="ghost">
+          <Button variant="ghost" className="hover:bg-accent hover:text-accent-foreground">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to All Children
           </Button>

@@ -20,8 +20,7 @@ const SocialButton = ({ icon: Icon, provider, onClick, disabled = false }) => (
     variant="outline" 
     onClick={onClick}
     disabled={disabled}
-    className="w-full h-12 hover:shadow-md transition-all duration-300"
-    style={{ borderColor: '#BDC4A7' }}
+    className="w-full h-12 hover:shadow-md transition-all duration-300 border-border hover:bg-accent hover:text-accent-foreground"
   >
     <Icon className="w-5 h-5 mr-3" />
     Continue with {provider}
@@ -43,154 +42,102 @@ const FacebookIcon = () => (
   </svg>
 );
 
-const AppleIcon = () => (
-  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-    <path d="M12.017 0C8.396 0 8.025.044 7.333.06 5.301.179 3.712 1.49 3.712 3.525c0 1.648.825 2.876 2.168 2.876.37 0 .713-.07 1.005-.168 1.186-.4 2.536-.641 4.132-.641 1.596 0 2.946.241 4.132.641.292.098.635.168 1.005.168 1.343 0 2.168-1.228 2.168-2.876C18.322 1.49 16.733.179 14.701.06 14.009.044 13.638 0 12.017 0zM12.017 23.973c4.624 0 8.374-3.75 8.374-8.374 0-1.077-.204-2.105-.576-3.049-.372-.944-.918-1.79-1.605-2.477-.687-.687-1.533-1.233-2.477-1.605-.944-.372-1.972-.576-3.049-.576-1.077 0-2.105.204-3.049.576-.944.372-1.79.918-2.477 1.605-.687.687-1.233 1.533-1.605 2.477-.372.944-.576 1.972-.576 3.049 0 4.624 3.75 8.374 8.374 8.374z"/>
-  </svg>
-);
-
 export default function Auth() {
   const [mode, setMode] = useState('signin'); // 'signin', 'signup', 'email', 'mobile', 'verify'
+  const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
     mobile: '',
     password: '',
     confirmPassword: '',
-    firstName: '',
-    lastName: '',
     verificationCode: ''
   });
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handleSocialAuth = async (provider) => {
-    setIsLoading(true);
-    // In a real app, this would integrate with the authentication service
-    console.log(`Authenticating with ${provider}`);
-    
-    // Simulate loading
-    setTimeout(() => {
-      setIsLoading(false);
-      // Redirect to app or handle success
-    }, 2000);
-  };
 
   const handleEmailAuth = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    
-    // In a real app, this would handle email authentication
-    console.log('Email auth:', formData);
-    
-    setTimeout(() => {
-      setIsLoading(false);
-      if (mode === 'signup') {
-        setMode('verify');
-      }
-    }, 2000);
+    try {
+      // Simulate auth process
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      console.log('Email auth completed');
+    } catch (error) {
+      console.error('Auth error:', error);
+    }
+    setIsLoading(false);
   };
 
   const handleMobileAuth = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    
-    console.log('Mobile auth:', formData);
-    
-    setTimeout(() => {
-      setIsLoading(false);
+    try {
+      await new Promise(resolve => setTimeout(resolve, 2000));
       setMode('verify');
-    }, 2000);
+    } catch (error) {
+      console.error('Mobile auth error:', error);
+    }
+    setIsLoading(false);
   };
 
   const handleVerification = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    
-    console.log('Verifying code:', formData.verificationCode);
-    
-    setTimeout(() => {
-      setIsLoading(false);
-      // Redirect to main app
-    }, 2000);
+    try {
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      console.log('Verification completed');
+    } catch (error) {
+      console.error('Verification error:', error);
+    }
+    setIsLoading(false);
   };
 
   const renderWelcomeScreen = () => (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="text-center space-y-8"
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      className="text-center space-y-6"
     >
-      <div>
-        <div className="bg-background min-h-screen">
-          <CheckCircle2 className="w-10 h-10 text-white" />
-        </div>
-        <h1 className="text-foreground">
-          Welcome to ChoreChamp
-        </h1>
-        <p className="text-muted-foreground">
-          Turn chores into achievements for your family
-        </p>
-      </div>
-
       <div className="space-y-4">
-        <SocialButton 
-          icon={GoogleIcon} 
-          provider="Google" 
-          onClick={() => handleSocialAuth('google')}
-          disabled={isLoading}
-        />
-        <SocialButton 
-          icon={FacebookIcon} 
-          provider="Facebook" 
-          onClick={() => handleSocialAuth('facebook')}
-          disabled={isLoading}
-        />
-        <SocialButton 
-          icon={AppleIcon} 
-          provider="Apple" 
-          onClick={() => handleSocialAuth('apple')}
-          disabled={isLoading}
-        />
+        <div className="w-16 h-16 mx-auto rounded-full bg-primary/20 flex items-center justify-center">
+          <CheckCircle2 className="w-8 h-8 text-primary" />
+        </div>
+        <div>
+          <h2 className="text-2xl font-bold text-foreground">Welcome to ChoreChamp!</h2>
+          <p className="text-muted-foreground mt-2">
+            Turn chores into fun, rewarding experiences for your family.
+          </p>
+        </div>
       </div>
 
-      <div className="flex items-center">
-        <Separator className="flex-1" />
-        <span className="text-muted-foreground">or continue with</span>
-        <Separator className="flex-1" />
+      <div className="space-y-3">
+        <SocialButton icon={GoogleIcon} provider="Google" onClick={() => console.log('Google auth')} />
+        <SocialButton icon={FacebookIcon} provider="Facebook" onClick={() => console.log('Facebook auth')} />
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="relative">
+        <Separator />
+        <span className="absolute inset-x-0 top-1/2 transform -translate-y-1/2 bg-card text-muted-foreground text-sm px-2 w-fit mx-auto">
+          or continue with
+        </span>
+      </div>
+
+      <div className="grid grid-cols-2 gap-3">
         <Button 
           variant="outline" 
           onClick={() => setMode('email')}
-          className="h-12"
-          style={{ borderColor: '#BDC4A7' }}
+          className="h-12 border-border hover:bg-accent hover:text-accent-foreground"
         >
-          <Mail className="w-5 h-5 mr-2" />
+          <Mail className="w-4 h-4 mr-2" />
           Email
         </Button>
         <Button 
           variant="outline" 
           onClick={() => setMode('mobile')}
-          className="h-12"
-          style={{ borderColor: '#BDC4A7' }}
+          className="h-12 border-border hover:bg-accent hover:text-accent-foreground"
         >
-          <Smartphone className="w-5 h-5 mr-2" />
-          Mobile
+          <Smartphone className="w-4 h-4 mr-2" />
+          Phone
         </Button>
-      </div>
-
-      <div className="text-center">
-        <p className="text-muted-foreground">
-          Already have an account?{' '}
-          <button 
-            onClick={() => setMode('signin')}
-            className="font-medium underline hover:no-underline"
-            style={{ color: '#93827F' }}
-          >
-            Sign in
-          </button>
-        </p>
       </div>
     </motion.div>
   );
@@ -201,47 +148,19 @@ export default function Auth() {
       animate={{ opacity: 1, x: 0 }}
       className="space-y-6"
     >
-      <div className="flex items-center gap-4 mb-6">
-        <Button 
-          variant="ghost" 
-          size="icon" 
-          onClick={() => setMode('signup')}
-        >
-          <ArrowLeft className="w-4 h-4" />
-        </Button>
-        <h2 className="text-foreground">
-          {mode === 'signin' ? 'Sign In' : 'Create Account'}
+      <div className="text-center">
+        <h2 className="text-2xl font-bold text-foreground">
+          {mode === 'signin' ? 'Welcome back!' : 'Create your account'}
         </h2>
+        <p className="text-muted-foreground mt-2">
+          {mode === 'signin' 
+            ? 'Sign in to your ChoreChamp account' 
+            : 'Start making chores fun for your family'
+          }
+        </p>
       </div>
 
       <form onSubmit={handleEmailAuth} className="space-y-4">
-        {mode === 'signup' && (
-          <>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="firstName">First Name</Label>
-                <Input
-                  id="firstName"
-                  value={formData.firstName}
-                  onChange={(e) => setFormData(prev => ({ ...prev, firstName: e.target.value }))}
-                  style={{ borderColor: '#BDC4A7' }}
-                  required
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="lastName">Last Name</Label>
-                <Input
-                  id="lastName"
-                  value={formData.lastName}
-                  onChange={(e) => setFormData(prev => ({ ...prev, lastName: e.target.value }))}
-                  style={{ borderColor: '#BDC4A7' }}
-                  required
-                />
-              </div>
-            </div>
-          </>
-        )}
-
         <div className="space-y-2">
           <Label htmlFor="email">Email Address</Label>
           <Input
@@ -249,7 +168,8 @@ export default function Auth() {
             type="email"
             value={formData.email}
             onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
-            style={{ borderColor: '#BDC4A7' }}
+            placeholder="Enter your email"
+            className="border-border focus:ring-ring"
             required
           />
         </div>
@@ -262,7 +182,8 @@ export default function Auth() {
               type={showPassword ? "text" : "password"}
               value={formData.password}
               onChange={(e) => setFormData(prev => ({ ...prev, password: e.target.value }))}
-              style={{ borderColor: '#BDC4A7' }}
+              placeholder="Enter your password"
+              className="border-border focus:ring-ring pr-10"
               required
             />
             <Button
@@ -285,7 +206,8 @@ export default function Auth() {
               type="password"
               value={formData.confirmPassword}
               onChange={(e) => setFormData(prev => ({ ...prev, confirmPassword: e.target.value }))}
-              style={{ borderColor: '#BDC4A7' }}
+              placeholder="Confirm your password"
+              className="border-border focus:ring-ring"
               required
             />
           </div>
@@ -293,7 +215,7 @@ export default function Auth() {
 
         <Button 
           type="submit" 
-          className="bg-background min-h-screen"
+          className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
           disabled={isLoading}
         >
           {isLoading ? 'Please wait...' : mode === 'signin' ? 'Sign In' : 'Create Account'}
@@ -301,12 +223,11 @@ export default function Auth() {
       </form>
 
       <div className="text-center">
-        <p className="text-muted-foreground">
+        <p className="text-sm text-muted-foreground">
           {mode === 'signin' ? "Don't have an account?" : "Already have an account?"}{' '}
           <button 
             onClick={() => setMode(mode === 'signin' ? 'signup' : 'signin')}
-            className="font-medium underline hover:no-underline"
-            style={{ color: '#93827F' }}
+            className="font-medium underline hover:no-underline text-primary"
           >
             {mode === 'signin' ? 'Sign up' : 'Sign in'}
           </button>
@@ -321,17 +242,11 @@ export default function Auth() {
       animate={{ opacity: 1, x: 0 }}
       className="space-y-6"
     >
-      <div className="flex items-center gap-4 mb-6">
-        <Button 
-          variant="ghost" 
-          size="icon" 
-          onClick={() => setMode('signup')}
-        >
-          <ArrowLeft className="w-4 h-4" />
-        </Button>
-        <h2 className="text-foreground">
-          Continue with Mobile
-        </h2>
+      <div className="text-center">
+        <h2 className="text-2xl font-bold text-foreground">Enter your phone number</h2>
+        <p className="text-muted-foreground mt-2">
+          We'll send you a verification code to get started.
+        </p>
       </div>
 
       <form onSubmit={handleMobileAuth} className="space-y-4">
@@ -340,20 +255,17 @@ export default function Auth() {
           <Input
             id="mobile"
             type="tel"
-            placeholder="+61 4XX XXX XXX"
             value={formData.mobile}
             onChange={(e) => setFormData(prev => ({ ...prev, mobile: e.target.value }))}
-            style={{ borderColor: '#BDC4A7' }}
+            placeholder="+1 (555) 123-4567"
+            className="border-border focus:ring-ring"
             required
           />
-          <p className="text-muted-foreground">
-            We'll send you a verification code via SMS
-          </p>
         </div>
 
         <Button 
           type="submit" 
-          className="bg-background min-h-screen"
+          className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
           disabled={isLoading}
         >
           {isLoading ? 'Sending code...' : 'Send Verification Code'}
@@ -373,10 +285,11 @@ export default function Auth() {
           variant="ghost" 
           size="icon" 
           onClick={() => setMode('mobile')}
+          className="hover:bg-accent"
         >
           <ArrowLeft className="w-4 h-4" />
         </Button>
-        <h2 className="text-foreground">
+        <h2 className="text-2xl font-bold text-foreground">
           Enter Verification Code
         </h2>
       </div>
@@ -396,15 +309,14 @@ export default function Auth() {
             onChange={(e) => setFormData(prev => ({ ...prev, verificationCode: e.target.value }))}
             placeholder="000000"
             maxLength={6}
-            className="text-center text-lg font-mono tracking-widest"
-            style={{ borderColor: '#BDC4A7' }}
+            className="text-center text-lg font-mono tracking-widest border-border focus:ring-ring"
             required
           />
         </div>
 
         <Button 
           type="submit" 
-          className="bg-background min-h-screen"
+          className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
           disabled={isLoading || formData.verificationCode.length !== 6}
         >
           {isLoading ? 'Verifying...' : 'Verify & Continue'}
@@ -412,12 +324,11 @@ export default function Auth() {
       </form>
 
       <div className="text-center">
-        <p className="text-muted-foreground">
+        <p className="text-sm text-muted-foreground">
           Didn't receive a code?{' '}
           <button 
             onClick={() => console.log('Resend code')}
-            className="font-medium underline hover:no-underline"
-            style={{ color: '#93827F' }}
+            className="font-medium underline hover:no-underline text-primary"
           >
             Resend
           </button>
@@ -427,7 +338,7 @@ export default function Auth() {
   );
 
   return (
-    <div className="bg-background min-h-screen">
+    <div className="min-h-screen flex items-center justify-center p-6 bg-background">
       <Card className="w-full max-w-md border-0 shadow-2xl">
         <CardContent className="p-8">
           {mode === 'signup' && renderWelcomeScreen()}

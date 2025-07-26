@@ -20,15 +20,15 @@ const NotificationItem = ({ notification, onMarkRead, onDelete, delay = 0 }) => 
   const getIcon = () => {
     switch (notification.type) {
       case 'chore_completed':
-        return <CheckCircle2 className="w-5 h-5" style={{ color: '#92B4A7' }} />;
+        return <CheckCircle2 className="w-5 h-5 text-secondary" />;
       case 'level_up':
-        return <Trophy className="w-5 h-5" style={{ color: '#DA4167' }} />;
+        return <Trophy className="w-5 h-5 text-destructive" />;
       case 'achievement':
-        return <Star className="w-5 h-5" style={{ color: '#93827F' }} />;
+        return <Star className="w-5 h-5 text-primary" />;
       case 'reminder':
-        return <Clock className="text-muted-foreground" />;
+        return <Clock className="w-5 h-5 text-muted-foreground" />;
       default:
-        return <Bell className="text-muted-foreground" />;
+        return <Bell className="w-5 h-5 text-muted-foreground" />;
     }
   };
 
@@ -56,31 +56,27 @@ const NotificationItem = ({ notification, onMarkRead, onDelete, delay = 0 }) => 
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: 20 }}
       transition={{ delay }}
-      className={`p-4 border-b last:border-b-0 ${!notification.is_read ? 'bg-blue-50' : ''}`}
-      style={{ 
-        borderColor: '#E2E8F0',
-        backgroundColor: !notification.is_read ? '#F3F5ED' : 'transparent'
-      }}
+      className={`p-4 border-b last:border-b-0 ${!notification.is_read ? 'bg-accent/50' : ''} border-border`}
     >
       <div className="flex items-start gap-4">
-        <div className="bg-background min-h-screen">
+        <div className="flex-shrink-0 p-2 rounded-full bg-accent">
           {getIcon()}
         </div>
         <div className="flex-grow min-w-0">
           <div className="flex items-start justify-between gap-2">
             <div className="flex-grow">
-              <h4 className="font-semibold" style={{ color: '#2F2F2F' }}>
+              <h4 className="font-semibold text-foreground">
                 {notification.title}
                 {!notification.is_read && (
-                  <Badge className="bg-background min-h-screen">
+                  <Badge className="ml-2 bg-destructive text-destructive-foreground">
                     New
                   </Badge>
                 )}
               </h4>
-              <p className="text-muted-foreground">
+              <p className="text-sm mt-1 text-muted-foreground">
                 {notification.message}
               </p>
-              <p className="text-muted-foreground">
+              <p className="text-xs mt-2 text-muted-foreground">
                 {getTimeDisplay(notification.created_date)}
               </p>
             </div>
@@ -90,18 +86,18 @@ const NotificationItem = ({ notification, onMarkRead, onDelete, delay = 0 }) => 
                   variant="ghost"
                   size="icon"
                   onClick={() => onMarkRead(notification.id)}
-                  className="hover:bg-blue-100"
+                  className="hover:bg-accent"
                 >
-                  <MailCheck className="w-4 h-4" style={{ color: '#93827F' }} />
+                  <MailCheck className="w-4 h-4 text-primary" />
                 </Button>
               )}
               <Button
                 variant="ghost"
                 size="icon"
                 onClick={() => onDelete(notification.id)}
-                className="hover:bg-red-100"
+                className="hover:bg-destructive/20"
               >
-                <Trash2 className="w-4 h-4" style={{ color: '#DA4167' }} />
+                <Trash2 className="w-4 h-4 text-destructive" />
               </Button>
             </div>
           </div>
@@ -178,12 +174,12 @@ export default function Notifications() {
 
   if (isLoading) {
     return (
-      <div className="p-6 space-y-6">
+      <div className="p-6 space-y-6 bg-background min-h-screen">
         <div className="animate-pulse">
-          <div className="h-8 bg-gray-200 rounded w-1/4 mb-6"></div>
+          <div className="h-8 bg-muted rounded w-1/4 mb-6"></div>
           <div className="space-y-4">
             {[1, 2, 3].map(i => (
-              <div key={i} className="h-20 bg-gray-200 rounded"></div>
+              <div key={i} className="h-20 bg-muted rounded"></div>
             ))}
           </div>
         </div>
@@ -192,11 +188,11 @@ export default function Notifications() {
   }
 
   return (
-    <div className="bg-background min-h-screen">
+    <div className="p-6 space-y-6 bg-background min-h-screen">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-bold" style={{ color: '#2F2F2F' }}>Notifications</h1>
-          <p className="text-muted-foreground">
+          <h1 className="text-3xl font-bold text-foreground">Notifications</h1>
+          <p className="text-lg mt-2 text-muted-foreground">
             {unreadCount > 0 ? `${unreadCount} unread notification${unreadCount > 1 ? 's' : ''}` : 'All caught up!'}
           </p>
         </div>
@@ -205,14 +201,14 @@ export default function Notifications() {
           <Button
             variant={filter === 'all' ? 'default' : 'outline'}
             onClick={() => setFilter('all')}
-            style={filter === 'all' ? { backgroundColor: '#93827F', color: 'white' } : {}}
+            className={filter === 'all' ? 'bg-primary text-primary-foreground' : 'border-border hover:bg-accent'}
           >
             All
           </Button>
           <Button
             variant={filter === 'unread' ? 'default' : 'outline'}
             onClick={() => setFilter('unread')}
-            style={filter === 'unread' ? { backgroundColor: '#93827F', color: 'white' } : {}}
+            className={filter === 'unread' ? 'bg-primary text-primary-foreground' : 'border-border hover:bg-accent'}
           >
             Unread ({unreadCount})
           </Button>
@@ -220,7 +216,7 @@ export default function Notifications() {
             <Button
               variant="outline"
               onClick={handleMarkAllRead}
-              className="flex items-center gap-2"
+              className="flex items-center gap-2 border-border hover:bg-accent"
             >
               <MailCheck className="w-4 h-4" />
               Mark All Read
@@ -233,8 +229,8 @@ export default function Notifications() {
         <CardContent className="p-0">
           {filteredNotifications.length === 0 ? (
             <div className="text-center py-12">
-              <BellOff className="w-16 h-16 mx-auto mb-4" style={{ color: '#BDC4A7' }} />
-              <h3 className="text-xl font-semibold mb-2" style={{ color: '#2F2F2F' }}>
+              <BellOff className="w-16 h-16 mx-auto mb-4 text-muted" />
+              <h3 className="text-xl font-semibold mb-2 text-foreground">
                 {filter === 'unread' ? 'No unread notifications' : 'No notifications'}
               </h3>
               <p className="text-muted-foreground">
