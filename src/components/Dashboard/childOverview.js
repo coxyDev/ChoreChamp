@@ -9,14 +9,16 @@ import { createPageUrl } from "@/utils";
 import { User, Star, Plus, Calendar } from "lucide-react";
 
 const avatarColors = {
-  blue: "bg-blue-500",
-  green: "bg-primary/100",
+  teal: "bg-primary",
+  gold: "bg-secondary", 
+  navy: "bg-chorechamp-navy",
+  orange: "bg-chorechamp-orange",
+  muted: "bg-muted",
   purple: "bg-purple-500",
-  orange: "bg-orange-500",
   pink: "bg-pink-500",
+  green: "bg-green-500",
   red: "bg-red-500",
-  yellow: "bg-yellow-500",
-  teal: "bg-teal-500",
+  blue: "bg-blue-500"
 };
 
 const ChildCard = ({ child, choreCount, completedToday, delay = 0 }) => {

@@ -7,16 +7,16 @@ import { Label } from "@/components/ui/label";
 import { X, User, DollarSign } from "lucide-react";
 
 const avatarColors = {
-  teal: "bg-primary",           // Logo teal
-  gold: "bg-secondary",         // Logo gold
-  navy: "bg-[hsl(var(--foreground))]",  // Logo navy
-  orange: "bg-chorechamp-orange", // From Tailwind config
+  teal: "bg-primary",
+  gold: "bg-secondary", 
+  navy: "bg-chorechamp-navy",
+  orange: "bg-chorechamp-orange",
   muted: "bg-muted",
-  accent: "bg-accent",
-  purple: "bg-[#9333ea]",       // Keep for variety
-  pink: "bg-[#ec4899]",         // Keep for variety
-  green: "bg-[#22c55e]",        // Keep for variety
-  red: "bg-destructive"         // Use system destructive
+  purple: "bg-purple-500",
+  pink: "bg-pink-500",
+  green: "bg-green-500",
+  red: "bg-red-500",
+  blue: "bg-blue-500"
 };
 
 export default function AddChildForm({ onSubmit, onCancel, child = null }) {

@@ -5,37 +5,37 @@
 @layer base {
   :root {
     /* ChoreChamp Logo-Based Color Palette */
-    --background: 248 250 252;
-    --foreground: 58 74 107;
-    --card: 255 255 255;
-    --card-foreground: 58 74 107;
+    --background: 248 250 252; /* Light gray background */
+    --foreground: 58 74 107;   /* Navy text */
+    --card: 255 255 255;       /* White cards */
+    --card-foreground: 58 74 107; /* Navy text on cards */
     --popover: 255 255 255;
     --popover-foreground: 58 74 107;
     
     /* Primary - Logo Teal */
-    --primary: 78 205 196;
-    --primary-foreground: 255 255 255;
+    --primary: 78 205 196;     /* Teal */
+    --primary-foreground: 255 255 255; /* White text on teal */
     
     /* Secondary - Logo Golden Yellow */
-    --secondary: 255 217 61;
-    --secondary-foreground: 58 74 107;
+    --secondary: 255 217 61;   /* Gold */
+    --secondary-foreground: 58 74 107; /* Navy text on gold */
     
-    /* Muted - Light teal variation */
-    --muted: 224 242 241;
-    --muted-foreground: 88 110 142;
+    /* Muted - Light gray/neutral */
+    --muted: 241 245 249;      /* Very light gray */
+    --muted-foreground: 100 116 139; /* Slate gray text */
     
-    /* Accent - Logo Golden Yellow */
-    --accent: 255 217 61;
-    --accent-foreground: 58 74 107;
+    /* Accent - Use a complementary color instead of gold again */
+    --accent: 226 232 240;     /* Light gray for accents */
+    --accent-foreground: 58 74 107; /* Navy text */
     
     /* Destructive - Warm coral for warnings */
-    --destructive: 239 68 68;
+    --destructive: 239 68 68;  /* Red */
     --destructive-foreground: 255 255 255;
     
     /* Borders and inputs */
-    --border: 226 232 240;
-    --input: 241 245 249;
-    --ring: 78 205 196;
+    --border: 226 232 240;     /* Light gray border */
+    --input: 241 245 249;      /* Light gray input bg */
+    --ring: 78 205 196;        /* Teal focus ring */
     --radius: 0.75rem;
     
     /* Sidebar colors - Logo inspired */
@@ -43,41 +43,41 @@
     --sidebar-foreground: 58 74 107;
     --sidebar-primary: 78 205 196;
     --sidebar-primary-foreground: 255 255 255;
-    --sidebar-accent: 248 253 252;
+    --sidebar-accent: 241 245 249; /* Light gray */
     --sidebar-accent-foreground: 58 74 107;
     --sidebar-border: 226 232 240;
     --sidebar-ring: 78 205 196;
   }
 
   .dark {
-    --background: 58 74 107;
-    --foreground: 248 250 252;
-    --card: 71 85 129;
+    --background: 15 23 42;    /* Dark slate background */
+    --foreground: 248 250 252; /* Light text */
+    --card: 30 41 59;          /* Dark card */
     --card-foreground: 248 250 252;
-    --popover: 71 85 129;
+    --popover: 30 41 59;
     --popover-foreground: 248 250 252;
-    --primary: 78 205 196;
-    --primary-foreground: 58 74 107;
-    --secondary: 255 217 61;
-    --secondary-foreground: 58 74 107;
-    --muted: 71 85 129;
-    --muted-foreground: 156 163 175;
-    --accent: 71 85 129;
+    --primary: 78 205 196;     /* Keep teal */
+    --primary-foreground: 15 23 42; /* Dark text on teal */
+    --secondary: 255 217 61;   /* Keep gold */
+    --secondary-foreground: 15 23 42; /* Dark text on gold */
+    --muted: 51 65 85;         /* Dark muted */
+    --muted-foreground: 148 163 184;
+    --accent: 51 65 85;        /* Dark accent */
     --accent-foreground: 248 250 252;
     --destructive: 239 68 68;
     --destructive-foreground: 248 250 252;
-    --border: 71 85 129;
-    --input: 71 85 129;
+    --border: 51 65 85;
+    --input: 51 65 85;
     --ring: 78 205 196;
     
     /* Sidebar colors - dark mode */
-    --sidebar-background: 58 74 107;
+    --sidebar-background: 15 23 42;
     --sidebar-foreground: 248 250 252;
     --sidebar-primary: 78 205 196;
-    --sidebar-primary-foreground: 58 74 107;
-    --sidebar-accent: 71 85 129;
+    --sidebar-primary-foreground: 15 23 42;
+    --sidebar-accent: 51 65 85;
     --sidebar-accent-foreground: 248 250 252;
-    --sidebar-border: 71 85 129;
+    --sidebar-border: 51 65 85;
     --sidebar-ring: 78 205 196;
   }
 }
@@ -111,6 +111,7 @@
   color: white;
 }
 
+/* Additional color utilities */
 .text-chorechamp-teal { color: rgb(78, 205, 196); }
 .text-chorechamp-gold { color: rgb(255, 217, 61); }
 .text-chorechamp-navy { color: rgb(58, 74, 107); }

@@ -8,18 +8,18 @@ import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { User, Star, DollarSign, ClipboardCheck } from "lucide-react";
 
-const avatarColors = {
-  teal: "bg-primary",           // Logo teal
-  gold: "bg-secondary",         // Logo gold
-  navy: "bg-[hsl(var(--foreground))]",  // Logo navy
-  orange: "bg-chorechamp-orange", // From Tailwind config
-  muted: "bg-muted",
-  accent: "bg-accent",
-  purple: "bg-[#9333ea]",       // Keep for variety
-  pink: "bg-[#ec4899]",         // Keep for variety
-  green: "bg-[#22c55e]",        // Keep for variety
-  red: "bg-destructive"         // Use system destructive
-};
+const avatarColors = [
+  { value: "teal", class: "bg-primary", name: "Teal" },           // Logo teal
+  { value: "gold", class: "bg-secondary", name: "Gold" },         // Logo gold  
+  { value: "navy", class: "bg-chorechamp-navy", name: "Navy" },   // Logo navy
+  { value: "orange", class: "bg-chorechamp-orange", name: "Orange" }, // Logo orange
+  { value: "muted", class: "bg-muted", name: "Gray" },
+  { value: "purple", class: "bg-purple-500", name: "Purple" },
+  { value: "pink", class: "bg-pink-500", name: "Pink" },
+  { value: "green", class: "bg-green-500", name: "Green" },
+  { value: "red", class: "bg-red-500", name: "Red" },
+  { value: "blue", class: "bg-blue-500", name: "Blue" }
+];
 
 export default function ChildCard({ child, choreCount = 0, completedToday = 0, delay = 0 }) {
   const progressToNextLevel = ((child.total_points || 0) % 100);

@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 
-import ChildProfileHeader from "../components/children/ChildProfileHeader";
+import ChildProfileHeader from "../components/Children/childProfileHeader";
 import ChildChoreList from "../components/children/ChildChoreList";
 
 export default function ChildProfile() {
