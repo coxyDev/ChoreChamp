@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Child } from '@/entities/all'; // Assuming this path is correct for your Child entity
 
 const avatarColors = {
-  blue: "bg-blue-500", green: "bg-green-500", purple: "bg-purple-500",
+  blue: "bg-blue-500", green: "bg-primary/100", purple: "bg-purple-500",
   orange: "bg-orange-500", pink: "bg-pink-500", red: "bg-red-500",
   yellow: "bg-yellow-500", teal: "bg-teal-500",
 };
@@ -53,7 +53,7 @@ export default function ChildProfileHeader({ child }) {
               <h1 className="text-4xl font-bold text-foreground">{currentChild.name}</h1>
               <div className="flex items-center justify-center md:justify-start gap-3 mt-2">
                 <Badge variant="outline" className="text-sm bg-card"><Calendar className="w-3 h-3 mr-1" /> Age {currentChild.age}</Badge>
-                <Badge className="bg-purple-100 text-purple-700 text-sm"><Award className="w-3 h-3 mr-1" /> Level {currentChild.level}</Badge>
+                <Badge className="bg-primary/20 text-primary text-sm"><Award className="w-3 h-3 mr-1" /> Level {currentChild.level}</Badge>
               </div>
               <div className="mt-4">
                  <Progress value={progressToNextLevel} className="h-3" />
@@ -64,14 +64,14 @@ export default function ChildProfileHeader({ child }) {
             </div>
             <div className="flex flex-col gap-4 bg-card p-4 rounded-xl shadow-md border-border w-full md:w-auto">
               <div className="flex items-center gap-4">
-                <div className="p-2 bg-yellow-100 rounded-lg"><Star className="w-5 h-5 text-yellow-500" /></div>
+                <div className="p-2 bg-yellow-100 rounded-lg"><Star className="w-5 h-5 text-secondary" /></div>
                 <div>
                   <p className="text-xs text-muted-foreground">Total Points</p>
                   <p className="text-xl font-bold text-foreground">{currentChild.total_points}</p>
                 </div>
               </div>
               <div className="flex items-center gap-4">
-                <div className="p-2 bg-green-100 rounded-lg"><DollarSign className="w-5 h-5 text-green-600" /></div>
+                <div className="p-2 bg-green-100 rounded-lg"><DollarSign className="w-5 h-5 text-primary" /></div>
                 <div>
                   <p className="text-xs text-muted-foreground">Money in Bank</p>
                   <p className="text-xl font-bold text-foreground">${(currentChild.total_money || 0).toFixed(2)}</p>

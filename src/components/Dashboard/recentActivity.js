@@ -27,10 +27,10 @@ const ActivityItem = ({ activity, children }) => {
   };
 
   const statusColors = {
-    completed: "bg-green-100 text-green-800",
-    pending: "bg-orange-100 text-orange-800",
-    verified: "bg-blue-100 text-blue-800"
-  };
+  completed: "bg-primary/20 text-primary",
+  pending: "bg-secondary/20 text-secondary-foreground",
+  verified: "bg-accent/20 text-accent-foreground"
+};
 
   const statusIcons = {
     completed: CheckCircle2,
@@ -41,28 +41,28 @@ const ActivityItem = ({ activity, children }) => {
   const StatusIcon = statusIcons[activity.status] || Clock;
 
   return (
-    <div className="flex items-center gap-4 p-3 rounded-lg hover:bg-slate-50 transition-colors">
-      <div className="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center">
+    <div className="flex items-center gap-4 p-3 rounded-lg hover:bg-muted transition-colors">
+      <div className="w-10 h-10 bg-muted rounded-full flex items-center justify-center">
         <StatusIcon className={`w-5 h-5 ${
-          activity.status === 'completed' ? 'text-green-600' : 
-          activity.status === 'verified' ? 'text-blue-600' : 'text-orange-600'
+          activity.status === 'completed' ? 'text-primary' : 
+          activity.status === 'verified' ? 'text-accent' : 'text-secondary'
         }`} />
       </div>
       <div className="flex-1 min-w-0">
-        <p className="font-medium text-slate-900 truncate">{activity.title}</p>
+        <p className="font-medium text-foreground truncate">{activity.title}</p>
         <div className="flex items-center gap-2 mt-1">
-          <span className="text-sm text-slate-600">{child?.name || 'Unknown Child'}</span>
+          <span className="text-sm text-muted-foreground">{child?.name || 'Unknown Child'}</span>
           <Badge variant="outline" className={`text-xs ${statusColors[activity.status] || statusColors.pending}`}>
             {activity.status || 'pending'}
           </Badge>
         </div>
       </div>
       <div className="text-right">
-        <div className="flex items-center gap-1 text-yellow-600 mb-1">
+        <div className="flex items-center gap-1 text-secondary mb-1">
           <Star className="w-3 h-3 fill-current" />
           <span className="text-sm font-medium">{activity.points || 0}</span>
         </div>
-        <p className="text-xs text-slate-500">
+        <p className="text-xs text-muted-foreground">
           {activity.completed_date ? getTimeDisplay(activity.completed_date) : getTimeDisplay(activity.created_date)}
         </p>
       </div>
@@ -89,14 +89,14 @@ export default function RecentActivity({ chores, children }) {
   return (
     <Card className="border-0 shadow-md">
       <CardHeader>
-        <CardTitle className="text-xl font-bold text-slate-900">Recent Activity</CardTitle>
+        <CardTitle className="text-xl font-bold text-foreground">Recent Activity</CardTitle>
       </CardHeader>
       <CardContent>
         {recentChores.length === 0 ? (
           <div className="text-center py-8">
-            <Calendar className="w-12 h-12 text-slate-300 mx-auto mb-3" />
-            <p className="text-slate-500">No recent activity</p>
-            <p className="text-sm text-slate-400 mt-1">Chore activities will appear here once you start assigning tasks.</p>
+            <Calendar className="w-12 h-12 text-muted-foreground-300 mx-auto mb-3" />
+            <p className="text-muted-foreground">No recent activity</p>
+            <p className="text-sm text-muted-foreground-400 mt-1">Chore activities will appear here once you start assigning tasks.</p>
           </div>
         ) : (
           <div className="space-y-2">

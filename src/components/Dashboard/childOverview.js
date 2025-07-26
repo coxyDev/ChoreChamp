@@ -10,7 +10,7 @@ import { User, Star, Plus, Calendar } from "lucide-react";
 
 const avatarColors = {
   blue: "bg-blue-500",
-  green: "bg-green-500",
+  green: "bg-primary/100",
   purple: "bg-purple-500",
   orange: "bg-orange-500",
   pink: "bg-pink-500",
@@ -37,18 +37,18 @@ const ChildCard = ({ child, choreCount, completedToday, delay = 0 }) => {
               </span>
             </div>
             <div className="flex-1">
-              <h3 className="font-bold text-lg text-slate-900">{child.name}</h3>
+              <h3 className="font-bold text-lg text-foreground">{child.name}</h3>
               <div className="flex items-center gap-2">
                 <Badge variant="outline" className="text-xs">
                   Age {child.age}
                 </Badge>
-                <Badge className="bg-purple-100 text-purple-700 text-xs">
+                <Badge className="bg-primary/20 text-primary text-xs">
                   Level {child.level || 1}
                 </Badge>
               </div>
             </div>
             <div className="text-right">
-              <div className="flex items-center gap-1 text-yellow-600">
+              <div className="flex items-center gap-1 text-secondary">
                 <Star className="w-4 h-4 fill-current" />
                 <span className="font-bold">{child.total_points || 0}</span>
               </div>
@@ -58,25 +58,25 @@ const ChildCard = ({ child, choreCount, completedToday, delay = 0 }) => {
         <CardContent className="space-y-4">
           <div className="space-y-2">
             <div className="flex justify-between text-sm">
-              <span className="text-slate-600">Progress to Level {(child.level || 1) + 1}</span>
-              <span className="text-slate-800 font-medium">{progressToNextLevel}/100</span>
+              <span className="text-muted-foreground">Progress to Level {(child.level || 1) + 1}</span>
+              <span className="text-foreground font-medium">{progressToNextLevel}/100</span>
             </div>
             <Progress value={progressToNextLevel} className="h-2" />
           </div>
           
           <div className="grid grid-cols-2 gap-4 text-center">
-            <div className="bg-slate-50 rounded-lg p-3">
-              <div className="text-2xl font-bold text-slate-900">{choreCount}</div>
-              <div className="text-xs text-slate-600">Active Chores</div>
+            <div className="bg-muted rounded-lg p-3">
+              <div className="text-2xl font-bold text-foreground">{choreCount}</div>
+              <div className="text-xs text-muted-foreground">Active Chores</div>
             </div>
-            <div className="bg-green-50 rounded-lg p-3">
-              <div className="text-2xl font-bold text-green-600">{completedToday}</div>
-              <div className="text-xs text-green-600">Completed Today</div>
+            <div className="bg-primary/10 rounded-lg p-3">
+              <div className="text-2xl font-bold text-primary">{completedToday}</div>
+              <div className="text-xs text-primary">Completed Today</div>
             </div>
           </div>
           
           <Link to={createPageUrl(`ChildProfile?childId=${child.id}`)}>
-            <Button variant="outline" className="w-full hover:bg-slate-50">
+            <Button variant="outline" className="w-full hover:bg-muted">
               View Profile
             </Button>
           </Link>
@@ -105,7 +105,7 @@ export default function ChildOverview({ children, chores }) {
     <Card className="border-0 shadow-md">
       <CardHeader>
         <div className="flex justify-between items-center">
-          <CardTitle className="text-xl font-bold text-slate-900">My Children</CardTitle>
+          <CardTitle className="text-xl font-bold text-foreground">My Children</CardTitle>
           <Link to={createPageUrl("Children")}>
             <Button size="sm" className="bg-blue-600 hover:bg-blue-700">
               <Plus className="w-4 h-4 mr-2" />
@@ -117,9 +117,9 @@ export default function ChildOverview({ children, chores }) {
       <CardContent>
         {children.length === 0 ? (
           <div className="text-center py-12">
-            <User className="w-16 h-16 text-slate-300 mx-auto mb-4" />
-            <h3 className="text-lg font-semibold text-slate-700 mb-2">No children added yet</h3>
-            <p className="text-slate-500 mb-6">Start by adding your first child to begin tracking chores!</p>
+            <User className="w-16 h-16 text-muted-foreground-300 mx-auto mb-4" />
+            <h3 className="text-lg font-semibold text-foreground/90 mb-2">No children added yet</h3>
+            <p className="text-muted-foreground mb-6">Start by adding your first child to begin tracking chores!</p>
             <Link to={createPageUrl("Children")}>
               <Button className="bg-blue-600 hover:bg-blue-700">
                 <Plus className="w-4 h-4 mr-2" />

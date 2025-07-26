@@ -6,18 +6,18 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { X, User, DollarSign } from "lucide-react";
 
-const avatarColors = [
-  { value: "blue", class: "bg-blue-500", name: "Blue" },
-  { value: "green", class: "bg-green-500", name: "Green" },
-  { value: "purple", class: "bg-purple-500", name: "Purple" },
-  { value: "orange", class: "bg-orange-500", name: "Orange" },
-  { value: "pink", class: "bg-pink-500", name: "Pink" },
-  { value: "red", class: "bg-red-500", name: "Red" },
-  { value: "yellow", class: "bg-yellow-500", name: "Yellow" },
-  { value: "teal", class: "bg-teal-500", name: "Teal" },
-  { value: "sage", class: "bg-secondary", name: "Sage" },
-  { value: "mauve", class: "bg-primary", name: "Mauve" }
-];
+const avatarColors = {
+  teal: "bg-primary",           // Logo teal
+  gold: "bg-secondary",         // Logo gold
+  navy: "bg-[hsl(var(--foreground))]",  // Logo navy
+  orange: "bg-chorechamp-orange", // From Tailwind config
+  muted: "bg-muted",
+  accent: "bg-accent",
+  purple: "bg-[#9333ea]",       // Keep for variety
+  pink: "bg-[#ec4899]",         // Keep for variety
+  green: "bg-[#22c55e]",        // Keep for variety
+  red: "bg-destructive"         // Use system destructive
+};
 
 export default function AddChildForm({ onSubmit, onCancel, child = null }) {
   const [isSubmitting, setIsSubmitting] = useState(false);

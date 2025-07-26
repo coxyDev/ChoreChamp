@@ -9,12 +9,12 @@ const ActionButton = ({ icon: Icon, title, description, to, color = "blue" }) =>
   <Link to={to} className="block">
     <Button variant="outline" className="w-full h-auto p-4 hover:shadow-md transition-all duration-300 border-slate-200">
       <div className="flex items-center gap-3 w-full">
-        <div className={`p-2 rounded-lg bg-${color}-100`}>
+        <div className={`p-2 rounded-lg bg-${color}/20`}>
           <Icon className={`w-5 h-5 text-${color}-600`} />
         </div>
         <div className="text-left flex-1">
-          <p className="font-medium text-slate-900">{title}</p>
-          <p className="text-xs text-slate-500 mt-1">{description}</p>
+          <p className="font-medium text-foreground">{title}</p>
+          <p className="text-xs text-muted-foreground mt-1">{description}</p>
         </div>
       </div>
     </Button>
@@ -25,8 +25,8 @@ export default function QuickActions() {
   return (
     <Card className="border-0 shadow-md">
       <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-xl font-bold text-slate-900">
-          <Zap className="w-5 h-5 text-yellow-500" />
+        <CardTitle className="flex items-center gap-2 text-xl font-bold text-foreground">
+          <Zap className="w-5 h-5 text-secondary" />
           Quick Actions
         </CardTitle>
       </CardHeader>

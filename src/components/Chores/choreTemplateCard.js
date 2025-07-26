@@ -9,12 +9,12 @@ import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 
 const categoryColors = {
-  bedroom: 'bg-blue-100 text-blue-800',
-  kitchen: 'bg-green-100 text-green-800',
-  outdoor: 'bg-orange-100 text-orange-800',
-  self_care: 'bg-purple-100 text-purple-800',
-  pets: 'bg-pink-100 text-pink-800',
-  default: 'bg-slate-100 text-slate-800'
+  bedroom: 'bg-primary/20 text-primary',
+  kitchen: 'bg-secondary/20 text-secondary-foreground',
+  outdoor: 'bg-chorechamp-orange/20 text-chorechamp-orange',
+  self_care: 'bg-accent/20 text-accent-foreground',
+  pets: 'bg-muted text-muted-foreground',
+  default: 'bg-card text-card-foreground'
 };
 
 export default function ChoreTemplateCard({ chore, delay }) {
@@ -29,27 +29,27 @@ export default function ChoreTemplateCard({ chore, delay }) {
       <Card className="flex flex-col h-full border-border shadow-md hover:shadow-lg transition-all duration-300">
         <CardHeader>
           <div className="flex justify-between items-start">
-            <CardTitle className="text-lg font-bold text-slate-900">{chore.title}</CardTitle>
+            <CardTitle className="text-lg font-bold text-foreground">{chore.title}</CardTitle>
             <Badge className={colorClass}>{chore.category.replace(/_/g, ' ')}</Badge>
           </div>
-          <p className="text-sm text-slate-500 pt-2">{chore.description}</p>
+          <p className="text-sm text-muted-foreground pt-2">{chore.description}</p>
         </CardHeader>
         <CardContent className="flex-grow">
           <div className="flex items-center justify-around text-center">
             <div>
-              <p className="text-xs text-slate-500">AGES</p>
-              <p className="font-bold text-slate-800">{chore.min_age}-{chore.max_age}</p>
+              <p className="text-xs text-muted-foreground">AGES</p>
+              <p className="font-bold text-foreground">{chore.min_age}-{chore.max_age}</p>
             </div>
             <div>
-              <p className="text-xs text-slate-500">DIFFICULTY</p>
-              <p className="font-bold text-slate-800 capitalize">{chore.difficulty}</p>
+              <p className="text-xs text-muted-foreground">DIFFICULTY</p>
+              <p className="font-bold text-foreground capitalize">{chore.difficulty}</p>
             </div>
           </div>
         </CardContent>
         <CardFooter className="bg-muted/50 p-4 flex justify-between items-center">
           <div className="flex gap-4">
             <div className="flex items-center gap-1 font-semibold text-primary/80">
-              <Star className="w-4 h-4 fill-current text-yellow-500" />
+              <Star className="w-4 h-4 fill-current text-secondary" />
               <span>{chore.points} points</span>
             </div>
           </div>

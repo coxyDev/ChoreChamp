@@ -19,9 +19,9 @@ import {
 import { motion } from "framer-motion";
 
 import StatsGrid from "../components/dashboard/StatsGrid";
-import RecentActivity from "../components/dashboard/RecentActivity";
-import ChildOverview from "../components/dashboard/ChildOverview";
-import QuickActions from "../components/dashboard/QuickActions";
+import RecentActivity from "../components/Dashboard/recentActivity";
+import ChildOverview from "../components/Dashboard/childOverview";
+import QuickActions from "../components/Dashboard/quickActions";
 
 export default function Dashboard() {
   const [children, setChildren] = useState([]);
@@ -154,12 +154,12 @@ export default function Dashboard() {
                 {stats.completedToday > 0 ? (
                   <div className="space-y-3">
                     <div className="flex items-center gap-2">
-                      <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0" />
-                      <span className="font-medium text-green-800 text-sm sm:text-base">
+                      <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0" />
+                      <span className="font-medium text-primary-800 text-sm sm:text-base">
                         {stats.completedToday} chore{stats.completedToday > 1 ? 's' : ''} completed today!
                       </span>
                     </div>
-                    <p className="text-sm text-green-600">
+                    <p className="text-sm text-primary">
                       Your family is doing great! Keep up the excellent work.
                     </p>
                   </div>

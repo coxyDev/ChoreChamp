@@ -9,16 +9,16 @@ import { createPageUrl } from "@/utils";
 import { User, Star, DollarSign, ClipboardCheck } from "lucide-react";
 
 const avatarColors = {
-  blue: "bg-blue-500",
-  green: "bg-green-500", 
-  purple: "bg-purple-500",
-  orange: "bg-orange-500",
-  pink: "bg-pink-500",
-  red: "bg-red-500",
-  yellow: "bg-yellow-500",
-  teal: "bg-teal-500",
-  sage: "bg-secondary",
-  mauve: "bg-primary"
+  teal: "bg-primary",           // Logo teal
+  gold: "bg-secondary",         // Logo gold
+  navy: "bg-[hsl(var(--foreground))]",  // Logo navy
+  orange: "bg-chorechamp-orange", // From Tailwind config
+  muted: "bg-muted",
+  accent: "bg-accent",
+  purple: "bg-[#9333ea]",       // Keep for variety
+  pink: "bg-[#ec4899]",         // Keep for variety
+  green: "bg-[#22c55e]",        // Keep for variety
+  red: "bg-destructive"         // Use system destructive
 };
 
 export default function ChildCard({ child, choreCount = 0, completedToday = 0, delay = 0 }) {

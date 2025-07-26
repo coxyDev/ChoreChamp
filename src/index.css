@@ -111,6 +111,15 @@
   color: white;
 }
 
+.text-chorechamp-teal { color: rgb(78, 205, 196); }
+.text-chorechamp-gold { color: rgb(255, 217, 61); }
+.text-chorechamp-navy { color: rgb(58, 74, 107); }
+.text-chorechamp-orange { color: rgb(255, 167, 38); }
+
+.bg-chorechamp-teal { background-color: rgb(78, 205, 196); }
+.bg-chorechamp-gold { background-color: rgb(255, 217, 61); }
+.bg-chorechamp-orange { background-color: rgb(255, 167, 38); }
+
 /* Custom scrollbar styles */
 ::-webkit-scrollbar {
   width: 6px;
