@@ -18,7 +18,7 @@ import {
 import { motion } from "framer-motion";
 
 import StatsGrid from "../components/dashboard/StatsGrid";
-import RecentActivity from "../components/dashboard/RecentActivity";
+import RecentActivity from "../components/dashboard/recentActivity";
 import ChildOverview from "../components/dashboard/ChildOverview";
 import QuickActions from "../components/dashboard/QuickActions";
 

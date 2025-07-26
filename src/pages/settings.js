@@ -76,13 +76,13 @@ export default function Settings() {
   };
 
   return (
-    <div className="p-6 space-y-8 max-w-4xl mx-auto" style={{ backgroundColor: '#F8F9F0', minHeight: '100vh' }}>
+    <div className="bg-background min-h-screen">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
       >
-        <h1 className="text-3xl font-bold" style={{ color: '#2F2F2F' }}>Settings</h1>
-        <p className="mt-1" style={{ color: '#5A5A5A' }}>
+        <h1 className="text-foreground">Settings</h1>
+        <p className="text-muted-foreground">
           Manage your account and family preferences.
         </p>
       </motion.div>
@@ -91,7 +91,7 @@ export default function Settings() {
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
         <Card className="border-0 shadow-lg">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2" style={{ color: '#2F2F2F' }}>
+            <CardTitle className="text-foreground">
               <UserIcon className="w-5 h-5" />
               Profile Information
             </CardTitle>
@@ -104,22 +104,21 @@ export default function Settings() {
               <div className="space-y-4">
                 <div className="flex items-center justify-between p-4 border rounded-lg" style={{ borderColor: '#BDC4A7' }}>
                   <div>
-                    <Label className="font-medium" style={{ color: '#2F2F2F' }}>Full Name</Label>
-                    <p className="text-sm mt-1" style={{ color: '#5A5A5A' }}>{currentUser?.full_name || 'Not set'}</p>
+                    <Label className="text-foreground">Full Name</Label>
+                    <p className="text-muted-foreground">{currentUser?.full_name || 'Not set'}</p>
                   </div>
-                  <Badge style={{ backgroundColor: '#92B4A7', color: '#2F2F2F' }}>Parent</Badge>
+                  <Badge className="bg-background min-h-screen">Parent</Badge>
                 </div>
                 <div className="flex items-center justify-between p-4 border rounded-lg" style={{ borderColor: '#BDC4A7' }}>
                   <div>
-                    <Label className="font-medium" style={{ color: '#2F2F2F' }}>Email Address</Label>
-                    <p className="text-sm mt-1" style={{ color: '#5A5A5A' }}>{currentUser?.email || 'Not set'}</p>
+                    <Label className="text-foreground">Email Address</Label>
+                    <p className="text-muted-foreground">{currentUser?.email || 'Not set'}</p>
                   </div>
                   <Mail className="w-4 h-4" style={{ color: '#93827F' }} />
                 </div>
                 <Button 
                   onClick={() => setIsEditingProfile(true)}
-                  className="text-white"
-                  style={{ backgroundColor: '#93827F' }}
+                  className="bg-background min-h-screen"
                 >
                   <Edit className="w-4 h-4 mr-2" />
                   Edit Profile
@@ -128,7 +127,7 @@ export default function Settings() {
             ) : (
               <div className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="full_name" style={{ color: '#2F2F2F' }}>Full Name</Label>
+                  <Label className="text-foreground">Full Name</Label>
                   <Input
                     id="full_name"
                     value={profileData.full_name}
@@ -137,7 +136,7 @@ export default function Settings() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="email" style={{ color: '#2F2F2F' }}>Email Address</Label>
+                  <Label className="text-foreground">Email Address</Label>
                   <Input
                     id="email"
                     type="email"
@@ -149,8 +148,7 @@ export default function Settings() {
                 <div className="flex gap-3">
                   <Button 
                     onClick={handleSaveProfile}
-                    className="text-white"
-                    style={{ backgroundColor: '#92B4A7' }}
+                    className="bg-background min-h-screen"
                   >
                     <Save className="w-4 h-4 mr-2" />
                     Save Changes
@@ -179,7 +177,7 @@ export default function Settings() {
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
         <Card className="border-0 shadow-lg">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2" style={{ color: '#2F2F2F' }}>
+            <CardTitle className="text-foreground">
               <Bell className="w-5 h-5" />
               Notification Preferences
             </CardTitle>
@@ -190,8 +188,8 @@ export default function Settings() {
           <CardContent className="space-y-6">
             <div className="flex items-center justify-between p-4 border rounded-lg" style={{ borderColor: '#BDC4A7' }}>
               <div>
-                <Label className="font-medium" style={{ color: '#2F2F2F' }}>Email Notifications</Label>
-                <p className="text-sm mt-1" style={{ color: '#5A5A5A' }}>
+                <Label className="text-foreground">Email Notifications</Label>
+                <p className="text-muted-foreground">
                   Receive email updates about chore completions and achievements.
                 </p>
               </div>
@@ -203,8 +201,8 @@ export default function Settings() {
 
             <div className="flex items-center justify-between p-4 border rounded-lg" style={{ borderColor: '#BDC4A7' }}>
               <div>
-                <Label className="font-medium" style={{ color: '#2F2F2F' }}>Push Notifications</Label>
-                <p className="text-sm mt-1" style={{ color: '#5A5A5A' }}>
+                <Label className="text-foreground">Push Notifications</Label>
+                <p className="text-muted-foreground">
                   Get instant notifications on your mobile device.
                 </p>
               </div>
@@ -216,8 +214,8 @@ export default function Settings() {
 
             <div className="flex items-center justify-between p-4 border rounded-lg" style={{ borderColor: '#BDC4A7' }}>
               <div>
-                <Label className="font-medium" style={{ color: '#2F2F2F' }}>Weekly Digest</Label>
-                <p className="text-sm mt-1" style={{ color: '#5A5A5A' }}>
+                <Label className="text-foreground">Weekly Digest</Label>
+                <p className="text-muted-foreground">
                   Receive a weekly summary of your family's chore progress.
                 </p>
               </div>
@@ -229,8 +227,8 @@ export default function Settings() {
 
             <div className="flex items-center justify-between p-4 border rounded-lg" style={{ borderColor: '#BDC4A7' }}>
               <div>
-                <Label className="font-medium" style={{ color: '#2F2F2F' }}>Chore Reminders</Label>
-                <p className="text-sm mt-1" style={{ color: '#5A5A5A' }}>
+                <Label className="text-foreground">Chore Reminders</Label>
+                <p className="text-muted-foreground">
                   Remind children about upcoming or overdue chores.
                 </p>
               </div>
@@ -242,8 +240,8 @@ export default function Settings() {
 
             <div className="flex items-center justify-between p-4 border rounded-lg" style={{ borderColor: '#BDC4A7' }}>
               <div>
-                <Label className="font-medium" style={{ color: '#2F2F2F' }}>Achievement Notifications</Label>
-                <p className="text-sm mt-1" style={{ color: '#5A5A5A' }}>
+                <Label className="text-foreground">Achievement Notifications</Label>
+                <p className="text-muted-foreground">
                   Celebrate when children reach new levels or milestones.
                 </p>
               </div>
@@ -260,7 +258,7 @@ export default function Settings() {
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
         <Card className="border-0 shadow-lg">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2" style={{ color: '#2F2F2F' }}>
+            <CardTitle className="text-foreground">
               <SettingsIcon className="w-5 h-5" />
               Family Settings
             </CardTitle>
@@ -271,10 +269,10 @@ export default function Settings() {
           <CardContent className="space-y-6">
             <div className="p-4 border rounded-lg" style={{ borderColor: '#BDC4A7', backgroundColor: '#F3F5ED' }}>
               <div className="flex items-center gap-2 mb-2">
-                <Label className="font-medium" style={{ color: '#2F2F2F' }}>Weekly Pocket Money System</Label>
-                <Badge style={{ backgroundColor: '#92B4A7', color: '#2F2F2F' }}>Active</Badge>
+                <Label className="text-foreground">Weekly Pocket Money System</Label>
+                <Badge className="bg-background min-h-screen">Active</Badge>
               </div>
-              <p className="text-sm" style={{ color: '#5A5A5A' }}>
+              <p className="text-muted-foreground">
                 Children receive fixed weekly allowances based on their age ($1 per year of age).
                 Individual amounts can be customized in each child's profile.
               </p>
@@ -282,10 +280,10 @@ export default function Settings() {
 
             <div className="p-4 border rounded-lg" style={{ borderColor: '#BDC4A7', backgroundColor: '#F3F5ED' }}>
               <div className="flex items-center gap-2 mb-2">
-                <Label className="font-medium" style={{ color: '#2F2F2F' }}>Points & Levels System</Label>
-                <Badge style={{ backgroundColor: '#92B4A7', color: '#2F2F2F' }}>Active</Badge>
+                <Label className="text-foreground">Points & Levels System</Label>
+                <Badge className="bg-background min-h-screen">Active</Badge>
               </div>
-              <p className="text-sm" style={{ color: '#5A5A5A' }}>
+              <p className="text-muted-foreground">
                 Children earn points for completing chores and advance through levels.
                 100 points = 1 level up.
               </p>
@@ -298,7 +296,7 @@ export default function Settings() {
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
         <Card className="border-0 shadow-lg">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2" style={{ color: '#2F2F2F' }}>
+            <CardTitle className="text-foreground">
               <Shield className="w-5 h-5" />
               Account & Security
             </CardTitle>

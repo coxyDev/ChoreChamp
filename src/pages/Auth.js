@@ -121,14 +121,13 @@ export default function Auth() {
       className="text-center space-y-8"
     >
       <div>
-        <div className="w-20 h-20 mx-auto rounded-2xl mb-6 flex items-center justify-center shadow-xl" 
-             style={{ background: 'linear-gradient(135deg, #93827F, #92B4A7)' }}>
+        <div className="bg-background min-h-screen">
           <CheckCircle2 className="w-10 h-10 text-white" />
         </div>
-        <h1 className="text-3xl font-bold mb-2" style={{ color: '#2F2F2F' }}>
+        <h1 className="text-foreground">
           Welcome to ChoreChamp
         </h1>
-        <p className="text-lg" style={{ color: '#5A5A5A' }}>
+        <p className="text-muted-foreground">
           Turn chores into achievements for your family
         </p>
       </div>
@@ -156,7 +155,7 @@ export default function Auth() {
 
       <div className="flex items-center">
         <Separator className="flex-1" />
-        <span className="px-4 text-sm" style={{ color: '#5A5A5A' }}>or continue with</span>
+        <span className="text-muted-foreground">or continue with</span>
         <Separator className="flex-1" />
       </div>
 
@@ -182,7 +181,7 @@ export default function Auth() {
       </div>
 
       <div className="text-center">
-        <p className="text-sm" style={{ color: '#5A5A5A' }}>
+        <p className="text-muted-foreground">
           Already have an account?{' '}
           <button 
             onClick={() => setMode('signin')}
@@ -210,7 +209,7 @@ export default function Auth() {
         >
           <ArrowLeft className="w-4 h-4" />
         </Button>
-        <h2 className="text-2xl font-bold" style={{ color: '#2F2F2F' }}>
+        <h2 className="text-foreground">
           {mode === 'signin' ? 'Sign In' : 'Create Account'}
         </h2>
       </div>
@@ -294,8 +293,7 @@ export default function Auth() {
 
         <Button 
           type="submit" 
-          className="w-full text-white" 
-          style={{ backgroundColor: '#93827F' }}
+          className="bg-background min-h-screen"
           disabled={isLoading}
         >
           {isLoading ? 'Please wait...' : mode === 'signin' ? 'Sign In' : 'Create Account'}
@@ -303,7 +301,7 @@ export default function Auth() {
       </form>
 
       <div className="text-center">
-        <p className="text-sm" style={{ color: '#5A5A5A' }}>
+        <p className="text-muted-foreground">
           {mode === 'signin' ? "Don't have an account?" : "Already have an account?"}{' '}
           <button 
             onClick={() => setMode(mode === 'signin' ? 'signup' : 'signin')}
@@ -331,7 +329,7 @@ export default function Auth() {
         >
           <ArrowLeft className="w-4 h-4" />
         </Button>
-        <h2 className="text-2xl font-bold" style={{ color: '#2F2F2F' }}>
+        <h2 className="text-foreground">
           Continue with Mobile
         </h2>
       </div>
@@ -348,15 +346,14 @@ export default function Auth() {
             style={{ borderColor: '#BDC4A7' }}
             required
           />
-          <p className="text-xs" style={{ color: '#5A5A5A' }}>
+          <p className="text-muted-foreground">
             We'll send you a verification code via SMS
           </p>
         </div>
 
         <Button 
           type="submit" 
-          className="w-full text-white" 
-          style={{ backgroundColor: '#93827F' }}
+          className="bg-background min-h-screen"
           disabled={isLoading}
         >
           {isLoading ? 'Sending code...' : 'Send Verification Code'}
@@ -379,13 +376,13 @@ export default function Auth() {
         >
           <ArrowLeft className="w-4 h-4" />
         </Button>
-        <h2 className="text-2xl font-bold" style={{ color: '#2F2F2F' }}>
+        <h2 className="text-foreground">
           Enter Verification Code
         </h2>
       </div>
 
       <div className="text-center mb-6">
-        <p style={{ color: '#5A5A5A' }}>
+        <p className="text-muted-foreground">
           We sent a code to {formData.mobile || formData.email}
         </p>
       </div>
@@ -407,8 +404,7 @@ export default function Auth() {
 
         <Button 
           type="submit" 
-          className="w-full text-white" 
-          style={{ backgroundColor: '#93827F' }}
+          className="bg-background min-h-screen"
           disabled={isLoading || formData.verificationCode.length !== 6}
         >
           {isLoading ? 'Verifying...' : 'Verify & Continue'}
@@ -416,7 +412,7 @@ export default function Auth() {
       </form>
 
       <div className="text-center">
-        <p className="text-sm" style={{ color: '#5A5A5A' }}>
+        <p className="text-muted-foreground">
           Didn't receive a code?{' '}
           <button 
             onClick={() => console.log('Resend code')}
@@ -431,7 +427,7 @@ export default function Auth() {
   );
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-6" style={{ backgroundColor: '#F8F9F0' }}>
+    <div className="bg-background min-h-screen">
       <Card className="w-full max-w-md border-0 shadow-2xl">
         <CardContent className="p-8">
           {mode === 'signup' && renderWelcomeScreen()}

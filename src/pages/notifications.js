@@ -26,9 +26,9 @@ const NotificationItem = ({ notification, onMarkRead, onDelete, delay = 0 }) => 
       case 'achievement':
         return <Star className="w-5 h-5" style={{ color: '#93827F' }} />;
       case 'reminder':
-        return <Clock className="w-5 h-5" style={{ color: '#5A5A5A' }} />;
+        return <Clock className="text-muted-foreground" />;
       default:
-        return <Bell className="w-5 h-5" style={{ color: '#5A5A5A' }} />;
+        return <Bell className="text-muted-foreground" />;
     }
   };
 
@@ -63,7 +63,7 @@ const NotificationItem = ({ notification, onMarkRead, onDelete, delay = 0 }) => 
       }}
     >
       <div className="flex items-start gap-4">
-        <div className="flex-shrink-0 p-2 rounded-full" style={{ backgroundColor: '#F3F5ED' }}>
+        <div className="bg-background min-h-screen">
           {getIcon()}
         </div>
         <div className="flex-grow min-w-0">
@@ -72,15 +72,15 @@ const NotificationItem = ({ notification, onMarkRead, onDelete, delay = 0 }) => 
               <h4 className="font-semibold" style={{ color: '#2F2F2F' }}>
                 {notification.title}
                 {!notification.is_read && (
-                  <Badge className="ml-2" style={{ backgroundColor: '#DA4167', color: 'white' }}>
+                  <Badge className="bg-background min-h-screen">
                     New
                   </Badge>
                 )}
               </h4>
-              <p className="text-sm mt-1" style={{ color: '#5A5A5A' }}>
+              <p className="text-muted-foreground">
                 {notification.message}
               </p>
-              <p className="text-xs mt-2" style={{ color: '#5A5A5A' }}>
+              <p className="text-muted-foreground">
                 {getTimeDisplay(notification.created_date)}
               </p>
             </div>
@@ -192,11 +192,11 @@ export default function Notifications() {
   }
 
   return (
-    <div className="p-6 space-y-6" style={{ backgroundColor: '#F8F9F0', minHeight: '100vh' }}>
+    <div className="bg-background min-h-screen">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <h1 className="text-3xl font-bold" style={{ color: '#2F2F2F' }}>Notifications</h1>
-          <p className="text-lg mt-2" style={{ color: '#5A5A5A' }}>
+          <p className="text-muted-foreground">
             {unreadCount > 0 ? `${unreadCount} unread notification${unreadCount > 1 ? 's' : ''}` : 'All caught up!'}
           </p>
         </div>
@@ -237,7 +237,7 @@ export default function Notifications() {
               <h3 className="text-xl font-semibold mb-2" style={{ color: '#2F2F2F' }}>
                 {filter === 'unread' ? 'No unread notifications' : 'No notifications'}
               </h3>
-              <p style={{ color: '#5A5A5A' }}>
+              <p className="text-muted-foreground">
                 {filter === 'unread' 
                   ? 'All caught up! Check back later for updates.' 
                   : 'Notifications about chore completions and achievements will appear here.'

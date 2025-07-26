@@ -65,10 +65,10 @@ export default function ChildProfile() {
 
   if (isLoading) {
     return (
-      <div className="p-6" style={{ backgroundColor: '#F8F9F0', minHeight: '100vh' }}>
+      <div className="bg-background min-h-screen">
         <div className="animate-pulse">
-          <div className="h-8 rounded w-1/3 mb-6" style={{ backgroundColor: '#BDC4A7' }}></div>
-          <div className="h-64 rounded-xl" style={{ backgroundColor: '#BDC4A7' }}></div>
+          <div className="bg-background min-h-screen"></div>
+          <div className="bg-background min-h-screen"></div>
         </div>
       </div>
     );
@@ -76,14 +76,14 @@ export default function ChildProfile() {
 
   if (!child) {
     return (
-      <div className="p-6" style={{ backgroundColor: '#F8F9F0', minHeight: '100vh' }}>
-        <p style={{ color: '#2F2F2F' }}>Child not found.</p>
+      <div className="bg-background min-h-screen">
+        <p className="text-foreground">Child not found.</p>
       </div>
     );
   }
 
   return (
-    <div className="p-6 space-y-8 max-w-7xl mx-auto" style={{ backgroundColor: '#F8F9F0', minHeight: '100vh' }}>
+    <div className="bg-background min-h-screen">
       <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }}>
         <Link to={createPageUrl("Children")}>
           <Button variant="ghost">
