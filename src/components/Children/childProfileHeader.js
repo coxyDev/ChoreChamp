@@ -8,10 +8,30 @@ import { Star, DollarSign, Award, Calendar, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Child } from '@/entities/all'; // Assuming this path is correct for your Child entity
 
-const avatarColors = {
-  blue: "bg-blue-500", green: "bg-primary/100", purple: "bg-purple-500",
-  orange: "bg-orange-500", pink: "bg-pink-500", red: "bg-red-500",
-  yellow: "bg-yellow-500", teal: "bg-teal-500",
+const avatarColors = [
+  { value: "teal", class: "bg-[#4ECDC4]", name: "Teal" },        // Primary logo color
+  { value: "gold", class: "bg-[#FFD93D]", name: "Gold" },        // Trophy color
+  { value: "navy", class: "bg-[#3A4A6B]", name: "Navy" },        // Text color
+  { value: "sky", class: "bg-[#87CEEB]", name: "Sky Blue" },     // Lighter blue
+  { value: "mint", class: "bg-[#3EB489]", name: "Mint" },        // Darker teal
+  { value: "coral", class: "bg-[#FF6B6B]", name: "Coral" },      // Warm accent
+  { value: "purple", class: "bg-[#9F7AEA]", name: "Purple" },    // Complementary
+  { value: "pink", class: "bg-[#ED64A6]", name: "Pink" },        // Fun accent
+  { value: "orange", class: "bg-[#F6AD55]", name: "Orange" },    // Warm accent
+  { value: "green", class: "bg-[#48BB78]", name: "Green" }       // Success color
+];
+
+const avatarColorsMap = {
+  teal: "bg-[#4ECDC4]",      // Primary logo color
+  gold: "bg-[#FFD93D]",      // Trophy color
+  navy: "bg-[#3A4A6B]",      // Text color
+  sky: "bg-[#87CEEB]",       // Lighter blue
+  mint: "bg-[#3EB489]",      // Darker teal
+  coral: "bg-[#FF6B6B]",     // Warm accent
+  purple: "bg-[#9F7AEA]",    // Complementary
+  pink: "bg-[#ED64A6]",      // Fun accent
+  orange: "bg-[#F6AD55]",    // Warm accent
+  green: "bg-[#48BB78]"      // Success color
 };
 
 export default function ChildProfileHeader({ child }) {

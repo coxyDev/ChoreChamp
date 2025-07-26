@@ -9,17 +9,30 @@ import { createPageUrl } from "@/utils";
 import { User, Star, DollarSign, ClipboardCheck } from "lucide-react";
 
 const avatarColors = [
-  { value: "teal", class: "bg-primary", name: "Teal" },           // Logo teal
-  { value: "gold", class: "bg-secondary", name: "Gold" },         // Logo gold  
-  { value: "navy", class: "bg-chorechamp-navy", name: "Navy" },   // Logo navy
-  { value: "orange", class: "bg-chorechamp-orange", name: "Orange" }, // Logo orange
-  { value: "muted", class: "bg-muted", name: "Gray" },
-  { value: "purple", class: "bg-purple-500", name: "Purple" },
-  { value: "pink", class: "bg-pink-500", name: "Pink" },
-  { value: "green", class: "bg-green-500", name: "Green" },
-  { value: "red", class: "bg-red-500", name: "Red" },
-  { value: "blue", class: "bg-blue-500", name: "Blue" }
+  { value: "teal", class: "bg-[#4ECDC4]", name: "Teal" },        // Primary logo color
+  { value: "gold", class: "bg-[#FFD93D]", name: "Gold" },        // Trophy color
+  { value: "navy", class: "bg-[#3A4A6B]", name: "Navy" },        // Text color
+  { value: "sky", class: "bg-[#87CEEB]", name: "Sky Blue" },     // Lighter blue
+  { value: "mint", class: "bg-[#3EB489]", name: "Mint" },        // Darker teal
+  { value: "coral", class: "bg-[#FF6B6B]", name: "Coral" },      // Warm accent
+  { value: "purple", class: "bg-[#9F7AEA]", name: "Purple" },    // Complementary
+  { value: "pink", class: "bg-[#ED64A6]", name: "Pink" },        // Fun accent
+  { value: "orange", class: "bg-[#F6AD55]", name: "Orange" },    // Warm accent
+  { value: "green", class: "bg-[#48BB78]", name: "Green" }       // Success color
 ];
+
+const avatarColorsMap = {
+  teal: "bg-[#4ECDC4]",      // Primary logo color
+  gold: "bg-[#FFD93D]",      // Trophy color
+  navy: "bg-[#3A4A6B]",      // Text color
+  sky: "bg-[#87CEEB]",       // Lighter blue
+  mint: "bg-[#3EB489]",      // Darker teal
+  coral: "bg-[#FF6B6B]",     // Warm accent
+  purple: "bg-[#9F7AEA]",    // Complementary
+  pink: "bg-[#ED64A6]",      // Fun accent
+  orange: "bg-[#F6AD55]",    // Warm accent
+  green: "bg-[#48BB78]"      // Success color
+};
 
 export default function ChildCard({ child, choreCount = 0, completedToday = 0, delay = 0 }) {
   const progressToNextLevel = ((child.total_points || 0) % 100);

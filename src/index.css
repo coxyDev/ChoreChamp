@@ -4,81 +4,97 @@
 
 @layer base {
   :root {
-    /* ChoreChamp Logo-Based Color Palette */
-    --background: 248 250 252; /* Light gray background */
-    --foreground: 58 74 107;   /* Navy text */
-    --card: 255 255 255;       /* White cards */
-    --card-foreground: 58 74 107; /* Navy text on cards */
-    --popover: 255 255 255;
-    --popover-foreground: 58 74 107;
+    /* ChoreChamp Logo-Matched Color Palette */
+    /* Using HSL values for Tailwind compatibility */
+    
+    /* Backgrounds */
+    --background: 252 19% 95%;            /* Very light gray/white background */
+    --foreground: 222 25% 31%;         /* Dark navy text from logo */
+    
+    /* Card backgrounds */
+    --card: 0 0% 100%;                 /* Pure white cards */
+    --card-foreground: 222 25% 31%;    /* Navy text on cards */
+    
+    /* Popovers */
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 25% 31%;
     
     /* Primary - Logo Teal */
-    --primary: 78 205 196;     /* Teal */
-    --primary-foreground: 255 255 255; /* White text on teal */
+    --primary: 177 62% 59%;            /* #4ECDC4 converted to HSL */
+    --primary-foreground: 0 0% 100%;   /* White text on teal */
     
     /* Secondary - Logo Golden Yellow */
-    --secondary: 255 217 61;   /* Gold */
-    --secondary-foreground: 58 74 107; /* Navy text on gold */
+    --secondary: 48 100% 62%;          /* #FFD93D converted to HSL */
+    --secondary-foreground: 222 25% 31%; /* Navy text on yellow */
     
-    /* Muted - Light gray/neutral */
-    --muted: 241 245 249;      /* Very light gray */
-    --muted-foreground: 100 116 139; /* Slate gray text */
+    /* Muted - Very light teal tint */
+    --muted: 177 40% 94%;              /* Very light teal */
+    --muted-foreground: 222 15% 45%;   /* Muted navy */
     
-    /* Accent - Use a complementary color instead of gold again */
-    --accent: 226 232 240;     /* Light gray for accents */
-    --accent-foreground: 58 74 107; /* Navy text */
+    /* Accent - Light teal (for hover states) */
+    --accent: 177 50% 90%;             /* Light teal */
+    --accent-foreground: 222 25% 31%;  /* Navy text */
     
-    /* Destructive - Warm coral for warnings */
-    --destructive: 239 68 68;  /* Red */
-    --destructive-foreground: 255 255 255;
+    /* Destructive - Coral red for errors */
+    --destructive: 0 72% 65%;          /* Soft red */
+    --destructive-foreground: 0 0% 100%;
     
     /* Borders and inputs */
-    --border: 226 232 240;     /* Light gray border */
-    --input: 241 245 249;      /* Light gray input bg */
-    --ring: 78 205 196;        /* Teal focus ring */
+    --border: 177 20% 88%;             /* Very light teal border */
+    --input: 0 0% 96%;                 /* Light gray input */
+    --ring: 177 62% 59%;               /* Teal focus ring */
     --radius: 0.75rem;
     
-    /* Sidebar colors - Logo inspired */
-    --sidebar-background: 255 255 255;
-    --sidebar-foreground: 58 74 107;
-    --sidebar-primary: 78 205 196;
-    --sidebar-primary-foreground: 255 255 255;
-    --sidebar-accent: 241 245 249; /* Light gray */
-    --sidebar-accent-foreground: 58 74 107;
-    --sidebar-border: 226 232 240;
-    --sidebar-ring: 78 205 196;
+    /* Sidebar colors */
+    --sidebar-background: 252 19% 95%;
+    --sidebar-foreground: 222 25% 31%;
+    --sidebar-primary: 252 19% 95%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 177 40% 94%;
+    --sidebar-accent-foreground: 222 25% 31%;
+    --sidebar-border: 177 20% 88%;
+    --sidebar-ring: 177 62% 59%;
   }
 
   .dark {
-    --background: 15 23 42;    /* Dark slate background */
-    --foreground: 248 250 252; /* Light text */
-    --card: 30 41 59;          /* Dark card */
-    --card-foreground: 248 250 252;
-    --popover: 30 41 59;
-    --popover-foreground: 248 250 252;
-    --primary: 78 205 196;     /* Keep teal */
-    --primary-foreground: 15 23 42; /* Dark text on teal */
-    --secondary: 255 217 61;   /* Keep gold */
-    --secondary-foreground: 15 23 42; /* Dark text on gold */
-    --muted: 51 65 85;         /* Dark muted */
-    --muted-foreground: 148 163 184;
-    --accent: 51 65 85;        /* Dark accent */
-    --accent-foreground: 248 250 252;
-    --destructive: 239 68 68;
-    --destructive-foreground: 248 250 252;
-    --border: 51 65 85;
-    --input: 51 65 85;
-    --ring: 78 205 196;
+    /* Dark mode with logo colors */
+    --background: 222 25% 16%;         /* Very dark navy */
+    --foreground: 0 0% 95%;            /* Almost white text */
     
-    /* Sidebar colors - dark mode */
-    --sidebar-background: 15 23 42;
-    --sidebar-foreground: 248 250 252;
-    --sidebar-primary: 78 205 196;
-    --sidebar-primary-foreground: 15 23 42;
-    --sidebar-accent: 51 65 85;
-    --sidebar-accent-foreground: 248 250 252;
-    --sidebar-border: 51 65 85;
-    --sidebar-ring: 78 205 196;
+    --card: 222 25% 20%;               /* Dark navy card */
+    --card-foreground: 0 0% 95%;
+    
+    --popover: 222 25% 20%;
+    --popover-foreground: 0 0% 95%;
+    
+    --primary: 177 62% 59%;            /* Keep teal */
+    --primary-foreground: 222 25% 16%; /* Dark text on teal */
+    
+    --secondary: 48 100% 62%;          /* Keep gold */
+    --secondary-foreground: 222 25% 16%;
+    
+    --muted: 222 20% 26%;              /* Dark muted */
+    --muted-foreground: 177 20% 65%;   /* Light teal text */
+    
+    --accent: 222 20% 30%;             /* Dark accent */
+    --accent-foreground: 0 0% 95%;
+    
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 95%;
+    
+    --border: 222 20% 26%;
+    --input: 222 20% 26%;
+    --ring: 177 62% 59%;
+    
+    /* Sidebar dark mode */
+    --sidebar-background: 222 25% 16%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 177 62% 59%;
+    --sidebar-primary-foreground: 222 25% 16%;
+    --sidebar-accent: 222 20% 26%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 222 20% 26%;
+    --sidebar-ring: 177 62% 59%;
   }
 }
 
@@ -92,50 +108,70 @@
   }
 }
 
-/* ChoreChamp specific utility classes */
+/* ChoreChamp Logo-Specific Classes */
 .chorechamp-gradient {
-  background: linear-gradient(135deg, rgb(78, 205, 196), rgb(255, 217, 61));
+  background: linear-gradient(135deg, #4ECDC4, #44A3C2);
 }
 
 .chorechamp-trophy {
-  color: rgb(255, 217, 61);
+  color: #FFD93D;
 }
 
 .chorechamp-primary {
-  background-color: rgb(78, 205, 196);
+  background-color: #4ECDC4;
   color: white;
+}
+
+.chorechamp-secondary {
+  background-color: #FFD93D;
+  color: #3A4A6B;
 }
 
 .chorechamp-navy {
-  background-color: rgb(58, 74, 107);
+  background-color: #3A4A6B;
   color: white;
 }
 
-/* Additional color utilities */
-.text-chorechamp-teal { color: rgb(78, 205, 196); }
-.text-chorechamp-gold { color: rgb(255, 217, 61); }
-.text-chorechamp-navy { color: rgb(58, 74, 107); }
-.text-chorechamp-orange { color: rgb(255, 167, 38); }
+/* Direct color utilities matching logo */
+.text-chorechamp-teal { color: #4ECDC4; }
+.text-chorechamp-gold { color: #FFD93D; }
+.text-chorechamp-navy { color: #3A4A6B; }
 
-.bg-chorechamp-teal { background-color: rgb(78, 205, 196); }
-.bg-chorechamp-gold { background-color: rgb(255, 217, 61); }
-.bg-chorechamp-orange { background-color: rgb(255, 167, 38); }
+.bg-chorechamp-teal { background-color: #4ECDC4; }
+.bg-chorechamp-gold { background-color: #FFD93D; }
+.bg-chorechamp-navy { background-color: #3A4A6B; }
 
-/* Custom scrollbar styles */
+/* Hover states with logo colors */
+.hover\:bg-chorechamp-teal:hover { background-color: #4ECDC4; }
+.hover\:bg-chorechamp-gold:hover { background-color: #FFD93D; }
+
+/* Custom scrollbar with logo colors */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: #f0f9ff;
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: hsl(var(--muted));
-  border-radius: 3px;
+  background: #4ECDC4;
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--muted-foreground));
+  background: #44A3C2;
+}
+
+/* Logo-inspired shadows */
+.shadow-chorechamp {
+  box-shadow: 0 4px 6px -1px rgba(78, 205, 196, 0.1), 
+              0 2px 4px -1px rgba(78, 205, 196, 0.06);
+}
+
+.shadow-chorechamp-lg {
+  box-shadow: 0 10px 15px -3px rgba(78, 205, 196, 0.1), 
+              0 4px 6px -2px rgba(78, 205, 196, 0.05);
 }
